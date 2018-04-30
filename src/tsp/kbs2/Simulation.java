@@ -5,10 +5,19 @@
  */
 package tsp.kbs2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Felix
  */
 public class Simulation {
-    
+    private boolean running;
+    private ArrayList<Product> products;
+    private ArrayList<Algorithm> algorithms;
+
+    public Simulation(){
+        products = new ArrayList<>();
+        algorithms = new ArrayList<>();
+    }    
 }
