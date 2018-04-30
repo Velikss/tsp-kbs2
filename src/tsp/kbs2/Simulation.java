@@ -20,4 +20,8 @@ public class Simulation {
         products = new ArrayList<>();
         algorithms = new ArrayList<>();
     }    
+    
+    public void generateProducts() {
+        //Genereert random producten        
+    }
 }

@@ -9,6 +9,6 @@ package tsp.kbs2;
  *
  * @author Felix
  */
-class Algorithm {
+public abstract class Algorithm {
     
 }
