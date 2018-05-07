@@ -17,9 +17,9 @@ public abstract class Algorithm {
     private String name;
     private int simulatieNr;
     private float afstand;
-    private ArrayList<Product> products = new ArrayList<>();
+    protected ArrayList<Product> products = new ArrayList<>();
 
-    public void solve(ArrayList<Product> locaties) {
+    public void solve(ArrayList<Product> products) {
     }
 
     public Long getTime() {
