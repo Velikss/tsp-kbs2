@@ -8,7 +8,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -16,7 +17,9 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 public class RightPanel extends JPanel implements ActionListener {
 
-    private JPanel settings, infoBox;
+    private JPanel settings;
+    private JTextArea infoBox;
+    private JScrollPane scroll;
 
     public RightPanel() {
         setPreferredSize(new Dimension(250, 800));
@@ -28,13 +31,17 @@ public class RightPanel extends JPanel implements ActionListener {
         settings.setBackground(Color.orange);
         add(settings, BorderLayout.PAGE_START);
 
-        infoBox = new JPanel();
-        infoBox.setLayout(new FlowLayout());
-        infoBox.setPreferredSize(new Dimension(200, 450));
-        infoBox.setBackground(Color.red);
-        add(infoBox,BorderLayout.CENTER);
+        infoBox = new JTextArea();
+        infoBox.setBorder(new TitledBorder(new EtchedBorder(), "Info box"));
+        infoBox.setFont(new Font("Serif", Font.ITALIC, 16));
+        infoBox.setLineWrap(true);
+        infoBox.setWrapStyleWord(true);
+        //comLog.setEditable(false);
+        scroll = new JScrollPane(infoBox);
+        add(scroll, BorderLayout.CENTER);
+//        add(infoBox, BorderLayout.CENTER);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
     }
