@@ -20,6 +20,7 @@ public class RightPanel extends JPanel implements ActionListener {
     private JPanel settings;
     private JTextArea infoBox;
     private JScrollPane scroll;
+    private JSpinner simcount;
 
     public RightPanel() {
         setPreferredSize(new Dimension(250, 800));
@@ -28,7 +29,14 @@ public class RightPanel extends JPanel implements ActionListener {
         settings = new JPanel();
         settings.setLayout(new FlowLayout());
         settings.setPreferredSize(new Dimension(200, 300));
-        settings.setBackground(Color.orange);
+        settings.setBackground(Color.white);
+        
+        settings.add(new JLabel("Simulatie instellingen"));
+        
+        settings.add(new JLabel("Aantal simulaties"));
+        simcount = new JSpinner();
+        settings.add(simcount);
+        
         add(settings, BorderLayout.PAGE_START);
 
         infoBox = new JTextArea();
