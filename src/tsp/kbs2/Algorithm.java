@@ -10,5 +10,6 @@ package tsp.kbs2;
  * @author Felix
  */
 public abstract class Algorithm {
+    private int test;
     
 }
