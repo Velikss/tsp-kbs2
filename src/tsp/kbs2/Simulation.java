@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Simulation {
     private boolean running;
-    private ArrayList<Product> products;
+    private ArrayList<Location> products;
     private ArrayList<Algorithm> algorithms;
 
     public Simulation(){

@@ -9,11 +9,11 @@ package tsp.kbs2;
  *
  * @author Felix
  */
-public class Product {
+public class Location {
     public int xPosition;
     public int yPosition;
     
-    public Product(int x, int y) {
+    public Location(int x, int y) {
         this.xPosition = x;
         this.yPosition = y;
     }

@@ -13,13 +13,14 @@ import java.util.ArrayList;
  */
 public abstract class Algorithm {
 
-    private Long time;
-    private String name;
-    private int simulatieNr;
-    private float afstand;
-    protected ArrayList<Product> products = new ArrayList<>();
+    protected Long time;
+    protected String name;
+    protected int simulatieNr;
+    protected float afstand;
+    protected ArrayList<Location> products = new ArrayList<>();
+    protected ArrayList<Location> newRoute = new ArrayList<>();
 
-    public void solve(ArrayList<Product> products) {
+    public void solve(ArrayList<Location> products) {
     }
 
     public Long getTime() {
@@ -54,11 +55,11 @@ public abstract class Algorithm {
         this.afstand = afstand;
     }
 
-    public ArrayList<Product> getProducts() {
+    public ArrayList<Location> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(ArrayList<Location> products) {
         this.products = products;
     }
 
