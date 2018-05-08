@@ -17,11 +17,11 @@ public class Twoopt extends Algorithm {
     }
     
     @Override
-    public void solve(ArrayList<Location> locaties) {
+    public void solve(ArrayList<Location> locations) {
         long startTime = System.nanoTime() / 1000;
         ArrayList<Location> currentSolution = new ArrayList<>();
         
-        for (Location product : products) {
+        for (Location loc : locations) {
             
         }
     }

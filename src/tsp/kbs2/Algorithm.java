@@ -17,7 +17,7 @@ public abstract class Algorithm {
     protected String name;
     protected int simulatieNr;
     protected float afstand;
-    protected ArrayList<Location> products = new ArrayList<>();
+    protected ArrayList<Location> locations = new ArrayList<>();
     protected ArrayList<Location> newRoute = new ArrayList<>();
 
     public void solve(ArrayList<Location> products) {
@@ -56,11 +56,11 @@ public abstract class Algorithm {
     }
 
     public ArrayList<Location> getProducts() {
-        return products;
+        return locations;
     }
 
     public void setProducts(ArrayList<Location> products) {
-        this.products = products;
+        this.locations = products;
     }
 
 }

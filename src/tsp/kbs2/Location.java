@@ -18,6 +18,15 @@ public class Location {
         this.yPosition = y;
     }
 
+    public int getPositionX() {
+        return xPosition;
+    }
+
+    public int getPositionY() {
+        return yPosition;
+    }
+
+    
     @Override
     public String toString() {
         return xPosition + ":" + yPosition;
