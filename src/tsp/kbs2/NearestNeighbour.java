@@ -18,10 +18,15 @@ public class NearestNeighbour extends Algorithm {
 
     @Override
     public void solve(ArrayList<Location> locations) {
+        //Start timer        
+        time = System.nanoTime() / 1000;
+        
+        //Algorithm        
         for (Location a : locations) {
-            for (Location b : locations) {
-
-            }
+            Location nearest = findNearest(locations, a);
+            System.out.println("For location " + a.getPositionX() + ";" 
+                    + a.getPositionY() + " is " + nearest.getPositionX() + ";" 
+                    + nearest.getPositionY() + " the nearest location");
         }
     }
 
@@ -45,7 +50,7 @@ public class NearestNeighbour extends Algorithm {
         Location nearest = null;
         double distance = 999999999;
         for (Location s : neighbours) {
-            if (this.calculateDistance(a, s) < distance) {
+            if (this.calculateDistance(a, s) != 0 && this.calculateDistance(a, s) < distance) {
                 distance = this.calculateDistance(a, s);
                 nearest = s;
             }

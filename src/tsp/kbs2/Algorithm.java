@@ -13,14 +13,14 @@ import java.util.ArrayList;
  */
 public abstract class Algorithm {
 
-    protected Long time;
+    protected long time;
     protected String name;
     protected int simulatieNr;
     protected float afstand;
     protected ArrayList<Location> locations = new ArrayList<>();
     protected ArrayList<Location> newRoute = new ArrayList<>();
 
-    public void solve(ArrayList<Location> products) {
+    public void solve(ArrayList<Location> locations) {
     }
 
     public Long getTime() {
