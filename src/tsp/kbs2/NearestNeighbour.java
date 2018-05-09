@@ -30,18 +30,18 @@ public class NearestNeighbour extends Algorithm {
         }
     }
 
-    private double calculateDistance(Location locationA, Location locationB) {
+    private double calculateDistance(Location locA, Location locB) {
         double distA;
         double distB;
-        if (locationA.getPositionX() > locationB.getPositionX()) {
-            distA = locationA.getPositionX() - locationB.getPositionX();
+        if (locA.getPositionX() > locB.getPositionX()) {
+            distA = locA.getPositionX() - locB.getPositionX();
         } else {
-            distA = locationB.getPositionX() - locationA.getPositionX();
+            distA = locB.getPositionX() - locA.getPositionX();
         }
-        if (locationA.getPositionY() > locationB.getPositionY()) {
-            distB = locationA.getPositionY() - locationB.getPositionY();
+        if (locA.getPositionY() > locB.getPositionY()) {
+            distB = locA.getPositionY() - locB.getPositionY();
         } else {
-            distB = locationB.getPositionY() - locationA.getPositionY();
+            distB = locB.getPositionY() - locA.getPositionY();
         }
         return Math.sqrt(Math.pow(distA, 2) + Math.pow(distB, 2));
     }

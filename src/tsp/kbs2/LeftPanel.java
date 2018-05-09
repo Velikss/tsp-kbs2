@@ -23,19 +23,19 @@ public class LeftPanel extends JPanel implements ActionListener {
         setLayout(new FlowLayout());
 
         //Initializing SimPanels
-        Weightedtwoopt = new SimPanel();
+        Weightedtwoopt = new SimPanel(false);
         Weightedtwoopt.setBorder(BorderFactory.createTitledBorder("Visualisatie Weighted 2 opt"));
         add(Weightedtwoopt);
 
-        Twoopt = new SimPanel();
+        Twoopt = new SimPanel(false);
         Twoopt.setBorder(BorderFactory.createTitledBorder("Visualisatie 2 opt"));
         add(Twoopt);
 
-        Bruteforce = new SimPanel();
+        Bruteforce = new SimPanel(false);
         Bruteforce.setBorder(BorderFactory.createTitledBorder("Visualisatie Bruteforce"));
         add(Bruteforce);
 
-        NearestNeighbour = new SimPanel();
+        NearestNeighbour = new SimPanel(true);
         NearestNeighbour.setBorder(BorderFactory.createTitledBorder("Visualisatie Nearest Neighbour"));
         add(NearestNeighbour);
     }

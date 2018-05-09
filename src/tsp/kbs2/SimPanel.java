@@ -14,17 +14,25 @@ import javax.swing.*;
  */
 public class SimPanel extends JPanel {
 
-    public SimPanel() {
+    private boolean raster;
+
+    public SimPanel(boolean raster) {
         this.setPreferredSize(new Dimension(500, 400));
+        this.raster = raster;
 
     }
 
+    @Override
     public void paintComponent(Graphics g) {
-
-        // teken de achtergrond
         super.paintComponent(g);
-
         setBackground(Color.WHITE);
-
+        if (raster) {
+            for (int j = 0; j <= 400; j += 5) {
+                g.drawLine(j, 0, j, 400);
+            }
+            for (int j = 0; j <= 500; j += 5) {
+                g.drawLine(0, j, 500, j);
+            }
+        }
     }
 }
