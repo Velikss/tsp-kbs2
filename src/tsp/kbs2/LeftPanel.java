@@ -8,7 +8,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
  *
@@ -20,26 +19,27 @@ public class LeftPanel extends JPanel implements ActionListener {
 
     public LeftPanel() {
         setPreferredSize(new Dimension(1100, 800));
+//        setLayout(new GridLayout(4, 2));
         setLayout(new FlowLayout());
 
         //Initializing SimPanels
-        Weightedtwoopt = new SimPanel(false);
-        Weightedtwoopt.setBorder(BorderFactory.createTitledBorder("Visualisatie Weighted 2 opt"));
+        Weightedtwoopt = new SimPanel(true);
+        Weightedtwoopt.add(new JLabel("Weighted Two Opt"));
         add(Weightedtwoopt);
 
-        Twoopt = new SimPanel(false);
-        Twoopt.setBorder(BorderFactory.createTitledBorder("Visualisatie 2 opt"));
+        Twoopt = new SimPanel(true);
+        Twoopt.add(new JLabel("Visualisatie 2 opt"));
         add(Twoopt);
 
-        Bruteforce = new SimPanel(false);
-        Bruteforce.setBorder(BorderFactory.createTitledBorder("Visualisatie Bruteforce"));
+        Bruteforce = new SimPanel(true);
+        Bruteforce.add(new JLabel("Visualisatie Bruteforce"));
         add(Bruteforce);
 
         NearestNeighbour = new SimPanel(true);
-        NearestNeighbour.setBorder(BorderFactory.createTitledBorder("Visualisatie Nearest Neighbour"));
+        NearestNeighbour.add(new JLabel("Visualisatie Nearest Neighbour"));
         add(NearestNeighbour);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
     }

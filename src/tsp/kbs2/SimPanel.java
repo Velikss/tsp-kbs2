@@ -14,11 +14,11 @@ import javax.swing.*;
  */
 public class SimPanel extends JPanel {
 
-    private boolean raster;
+    private boolean grid;
 
-    public SimPanel(boolean raster) {
-        this.setPreferredSize(new Dimension(500, 400));
-        this.raster = raster;
+    public SimPanel(boolean grid) {
+        this.setPreferredSize(new Dimension(500, 390));
+        this.grid = grid;
 
     }
 
@@ -26,12 +26,12 @@ public class SimPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         setBackground(Color.WHITE);
-        if (raster) {
-            for (int j = 0; j <= 400; j += 5) {
-                g.drawLine(j, 0, j, 400);
+        if (grid) {
+            for (int j = 1; j <= 499; j += 20) {
+                g.drawLine(j, 1, j, 389);
             }
-            for (int j = 0; j <= 500; j += 5) {
-                g.drawLine(0, j, 500, j);
+            for (int j = 20; j <= 389; j += 20) {
+                g.drawLine(1, j, 499, j);
             }
         }
     }

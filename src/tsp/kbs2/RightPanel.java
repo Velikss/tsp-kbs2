@@ -27,16 +27,17 @@ public class RightPanel extends JPanel implements ActionListener {
         setLayout(new BorderLayout());
 
         settings = new JPanel();
+        settings.setBorder(new TitledBorder(new EtchedBorder(), "Settings"));
         settings.setLayout(new FlowLayout());
         settings.setPreferredSize(new Dimension(200, 300));
         settings.setBackground(Color.white);
-        
-        settings.add(new JLabel("Simulatie instellingen"));
-        
+
+        settings.add(new JLabel("Simulatie Settings"));
+
         settings.add(new JLabel("Aantal simulaties"));
         simcount = new JSpinner();
         settings.add(simcount);
-        
+
         add(settings, BorderLayout.PAGE_START);
 
         infoBox = new JTextArea();
@@ -47,7 +48,6 @@ public class RightPanel extends JPanel implements ActionListener {
         //comLog.setEditable(false);
         scroll = new JScrollPane(infoBox);
         add(scroll, BorderLayout.CENTER);
-//        add(infoBox, BorderLayout.CENTER);
     }
 
     @Override
