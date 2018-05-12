@@ -23,20 +23,20 @@ public class LeftPanel extends JPanel implements ActionListener {
         setLayout(new FlowLayout());
 
         //Initializing SimPanels
-        Weightedtwoopt = new SimPanel(true);
-        Weightedtwoopt.add(new JLabel("Weighted Two Opt"));
+        Weightedtwoopt = new SimPanel(true, 20);
+        Weightedtwoopt.add(new JLabel("<html><font color='blue'>Visualisatie Weighted Two Opt</font></html>"));
         add(Weightedtwoopt);
 
-        Twoopt = new SimPanel(true);
-        Twoopt.add(new JLabel("Visualisatie 2 opt"));
+        Twoopt = new SimPanel(true, 10);
+        Twoopt.add(new JLabel("<html><font color='blue'>Visualisatie 2 opt</font></html>"));
         add(Twoopt);
 
-        Bruteforce = new SimPanel(true);
-        Bruteforce.add(new JLabel("Visualisatie Bruteforce"));
+        Bruteforce = new SimPanel(true, 10);
+        Bruteforce.add(new JLabel("<html><font color='blue'>Visualisatie Bruteforce</font></html>"));
         add(Bruteforce);
 
-        NearestNeighbour = new SimPanel(true);
-        NearestNeighbour.add(new JLabel("Visualisatie Nearest Neighbour"));
+        NearestNeighbour = new SimPanel(true, 10);
+        NearestNeighbour.add(new JLabel("<html><font color='blue'>Visualisatie Nearest Neighbour</font></html>"));
         add(NearestNeighbour);
     }
 
