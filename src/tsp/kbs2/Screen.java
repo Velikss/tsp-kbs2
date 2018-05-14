@@ -17,8 +17,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 public class Screen extends JFrame implements ActionListener {
 
-    private JPanel left = new LeftPanel();
-    private JPanel right = new RightPanel();
+    private LeftPanel left = new LeftPanel(11, 11);
+    private RightPanel right = new RightPanel(left);
 
     public Screen() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
