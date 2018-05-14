@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 public class LeftPanel extends JPanel implements ActionListener {
 
     private SimPanel Weightedtwoopt, Twoopt, Bruteforce, NearestNeighbour;
+    private JButton repaint;
     private int X, Y;
 
     public LeftPanel(int X, int Y) {
@@ -43,23 +44,30 @@ public class LeftPanel extends JPanel implements ActionListener {
         add(NearestNeighbour);
     }
 
-    public void setX(int X) {
-        this.X = X;
+    public void setXCoord(int X) {
+        Weightedtwoopt.setXCoord(X);
+        Twoopt.setXCoord(X);
+        Bruteforce.setXCoord(X);
+        NearestNeighbour.setXCoord(X);
     }
 
-    public void setY(int Y) {
-        this.Y = Y;
+    public void setYCoord(int Y) {
+        Weightedtwoopt.setYCoord(Y);
+        Twoopt.setYCoord(Y);
+        Bruteforce.setYCoord(Y);
+        NearestNeighbour.setYCoord(Y);
     }
 
     public int getXCoord() {
-        return X;
+        return Weightedtwoopt.getXCoord();
     }
 
     public int getYCoord() {
-        return Y;
+        return Weightedtwoopt.getYCoord();
     }
-   
+
     @Override
     public void actionPerformed(ActionEvent e) {
+
     }
 }

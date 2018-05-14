@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -30,7 +32,7 @@ public class RightPanel extends JPanel implements ActionListener {
         settings = new JPanel();
         settings.setBorder(new TitledBorder(new EtchedBorder(), "Settings"));
 //        settings.setLayout(new FlowLayout());
-        BoxLayout boxLayout = new BoxLayout(settings, BoxLayout.Y_AXIS); 
+        BoxLayout boxLayout = new BoxLayout(settings, BoxLayout.Y_AXIS);
         settings.setLayout(boxLayout);
         settings.setBackground(Color.white);
 
@@ -61,17 +63,38 @@ public class RightPanel extends JPanel implements ActionListener {
         settings.add(new JLabel("Aantal punten"));
         pointcount = new JSpinner();
         settings.add(pointcount);
-        
+
         settings.add(new JLabel("Hoogte"));
         height = new JSpinner();
-        int panelHeight = left.getYCoord();
-        height.setValue(panelHeight);
+        height.setValue(left.getYCoord());
+        height.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("Value changed to " + height.getValue());
+                int value = (Integer) height.getValue();
+                left.setYCoord(value);
+                System.out.println("Y coord set to " + left.getYCoord());
+                left.repaint();
+                System.out.println("Repainted!");
+            }
+        });
         settings.add(height);
-        
+
         settings.add(new JLabel("Breedte"));
         width = new JSpinner();
         int panelWidth = left.getXCoord();
         width.setValue(panelWidth);
+        width.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("Value changed to " + width.getValue());
+                int value = (Integer) width.getValue();
+                left.setXCoord(value);
+                System.out.println("Y coord set to " + left.getXCoord());
+                left.repaint();
+                System.out.println("Repainted!");
+            }
+        });
         settings.add(width);
 
         add(settings, BorderLayout.PAGE_START);
