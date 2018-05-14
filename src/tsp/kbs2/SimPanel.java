@@ -15,34 +15,37 @@ import javax.swing.*;
 public class SimPanel extends JPanel {
 
     private boolean grid;
-    private int amount;
+    private int linesX;
+    private int linesY;
 
-    public SimPanel(boolean grid, int amount) {
+    public SimPanel(boolean grid, int X, int Y) {
         this.setPreferredSize(new Dimension(500, 390));
         this.grid = grid;
-        this.amount = amount;
+        this.linesX = X;
+        this.linesY = Y;
 
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        int dimensionY = 389 / amount;
-        int dimensionX = 499 / amount;
+        int dimensionY = 387 / linesY;
+        int dimensionX = 498 / linesX;
         
-        int vertLength = 389 - (389 % amount);
-        int horizLength = 499 - (499 %amount);
-        
+        int lengthX = 498 - (498 % linesX);
+        int lengthY = 387 - (387 % linesY);
         
         super.paintComponent(g);
         setBackground(Color.WHITE);
+        g.setColor(Color.black);
+        
         if (grid) {
 //          Paints vertical lines
-            for (int j = 20; j <= 499; j += dimensionX) {
-                g.drawLine(j, 1, j, vertLength);
+            for (int j = 1; j <= lengthX + 1; j += dimensionX) {
+                g.drawLine(j, 1, j, lengthY);
             }
 //          Paints horizontal lines
-            for (int j = 20; j <= 389; j += dimensionY) {
-                g.drawLine(1, j, horizLength, j);
+            for (int j = 1; j <= lengthY + 1; j += dimensionY) {
+                g.drawLine(1, j, lengthX, j);
             }
         }
     }
