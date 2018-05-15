@@ -18,9 +18,10 @@ public abstract class Algorithm {
     protected int simulatieNr;
     protected float afstand;
     protected ArrayList<Location> locations = new ArrayList<>();
-    protected ArrayList<Location> newRoute = new ArrayList<>();
+    protected ArrayList<Location> route = new ArrayList<>();
 
-    public void solve(ArrayList<Location> locations) {
+    public ArrayList<Location> solve(ArrayList<Location> locations) {
+        return route;
     }
 
     public Long getTime() {

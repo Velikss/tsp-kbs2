@@ -9,18 +9,21 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
  *
  * @author Felix
  */
-public class Screen extends JFrame implements ActionListener {
+public class Simulator extends JFrame implements ActionListener {
+    private ArrayList<Location> locations;
 
-    private LeftPanel left = new LeftPanel(11, 11);
-    private RightPanel right = new RightPanel(left);
-
-    public Screen() {
+    public Simulator(ArrayList<Location> locs) {
+        this.locations = locs;
+        LeftPanel left = new LeftPanel(locations);
+        RightPanel right = new RightPanel(left);
+    
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("TSP Simulator");
         setSize(1400, 900);
@@ -36,6 +39,11 @@ public class Screen extends JFrame implements ActionListener {
         
         setVisible(true);
     }
+    
+    public ArrayList<Location> generateProducts(int amount) {
+        //Genereert random producten        
+        return locations;
+    }
 
     //action preformed toevoegen zodat je wat kunt doen met de knoppen en texten
     @Override
@@ -43,3 +51,4 @@ public class Screen extends JFrame implements ActionListener {
     }
 
 }
+

@@ -17,17 +17,31 @@ public class NearestNeighbour extends Algorithm {
     }
 
     @Override
-    public void solve(ArrayList<Location> locations) {
+    public ArrayList<Location> solve(ArrayList<Location> locations) {
         //Start timer        
         time = System.nanoTime() / 1000;
         
         //Algorithm        
-        for (Location a : locations) {
-            Location nearest = findNearest(locations, a);
-            System.out.println("For location " + a.getPositionX() + ";" 
-                    + a.getPositionY() + " is " + nearest.getPositionX() + ";" 
-                    + nearest.getPositionY() + " the nearest location");
+        ArrayList<Location> route = new ArrayList<>();
+        Location startLocation = new Location (0, 0);
+        route.add(startLocation);
+        
+        for (int i = 0; i <= (locations.size()+2); i++) {
+            Location nearest = findNearest(locations, route.get(i));
+            route.add(nearest);
+            locations.remove(nearest);
+            
+            //When the route is done, add (0, 0) as endpoint            
+            if(locations.size() == 0) {
+                route.add(new Location(0,0));
+            }
+            
         }
+        //End timer        
+        time = (System.nanoTime() / 1000) - time;
+        System.out.println(route);
+        System.out.println("Tijd:" + time);
+        return route;
     }
 
     private double calculateDistance(Location locA, Location locB) {

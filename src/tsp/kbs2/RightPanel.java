@@ -13,10 +13,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-/**
+/*
  *
  * @author Felix
  */
+
 public class RightPanel extends JPanel implements ActionListener {
 
     private JPanel settings;

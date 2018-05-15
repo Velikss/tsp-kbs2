@@ -16,14 +16,14 @@ public class Twoopt extends Algorithm {
         super.setName("Two-opt Algorithm");
     }
     
-    @Override
-    public void solve(ArrayList<Location> locations) {
-        long startTime = System.nanoTime() / 1000;
-        ArrayList<Location> currentSolution = new ArrayList<>();
-        
-        for (Location loc : locations) {
-            
-        }
-    }
+//    @Override
+//    public void solve(ArrayList<Location> locations) {
+//        long startTime = System.nanoTime() / 1000;
+//        ArrayList<Location> currentSolution = new ArrayList<>();
+//        
+//        for (Location loc : locations) {
+//            
+//        }
+//    }
     
 }

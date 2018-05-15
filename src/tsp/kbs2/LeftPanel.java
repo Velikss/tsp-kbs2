@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,30 +17,33 @@ import java.awt.event.ActionListener;
 public class LeftPanel extends JPanel implements ActionListener {
 
     private SimPanel Weightedtwoopt, Twoopt, Bruteforce, NearestNeighbour;
-    private JButton repaint;
+    private ArrayList<Location> locations;
     private int X, Y;
 
-    public LeftPanel(int X, int Y) {
+    public LeftPanel(ArrayList<Location> locations) {
+        this.locations = locations;
+        this.X = 11;
+        this.Y = 11;
+        
         setPreferredSize(new Dimension(1100, 800));
 //        setLayout(new GridLayout(4, 2));
         setLayout(new FlowLayout());
-        this.X = X;
-        this.Y = Y;
 
         //Initializing SimPanels
-        Weightedtwoopt = new SimPanel(true, X, Y);
+        Algorithm NearestNeighbourAlgorithm = new NearestNeighbour();
+        Weightedtwoopt = new SimPanel(NearestNeighbourAlgorithm, true, X, Y);
         Weightedtwoopt.add(new JLabel("<html><font color='blue'>Visualisatie Weighted Two Opt</font></html>"));
         add(Weightedtwoopt);
 
-        Twoopt = new SimPanel(true, X, Y);
+        Twoopt = new SimPanel(NearestNeighbourAlgorithm, true, X, Y);
         Twoopt.add(new JLabel("<html><font color='blue'>Visualisatie 2 opt</font></html>"));
         add(Twoopt);
 
-        Bruteforce = new SimPanel(true, X, Y);
+        Bruteforce = new SimPanel(NearestNeighbourAlgorithm, true, X, Y);
         Bruteforce.add(new JLabel("<html><font color='blue'>Visualisatie Bruteforce</font></html>"));
         add(Bruteforce);
 
-        NearestNeighbour = new SimPanel(true, X, Y);
+        NearestNeighbour = new SimPanel(NearestNeighbourAlgorithm, true, X, Y);
         NearestNeighbour.add(new JLabel("<html><font color='blue'>Visualisatie Nearest Neighbour</font></html>"));
         add(NearestNeighbour);
     }
