@@ -30,13 +30,8 @@ public class NearestNeighbour extends Algorithm {
             Location nearest = findNearest(locations, route.get(i));
             route.add(nearest);
             locations.remove(nearest);
-            
-            //When the route is done, add (0, 0) as endpoint            
-            if(locations.size() == 0) {
-                route.add(new Location(0,0));
-            }
-            
         }
+        route.add(new Location(0, 0));
         //End timer        
         time = (System.nanoTime() / 1000) - time;
         System.out.println(route);

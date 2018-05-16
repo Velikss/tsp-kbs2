@@ -1,54 +1,49 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Here comes the text of your license
+ * Each line should be prefixed with  * 
  */
 package tsp.kbs2;
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
  *
  * @author Felix
  */
-public class Simulator extends JFrame implements ActionListener {
-    private ArrayList<Location> locations;
+public class Simulator {
 
-    public Simulator(ArrayList<Location> locs) {
-        this.locations = locs;
-        LeftPanel left = new LeftPanel(locations);
-        RightPanel right = new RightPanel(left);
-    
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("TSP Simulator");
-        setSize(1400, 900);
-        FlowLayout layout = new FlowLayout(FlowLayout.LEFT);
-        layout.setVgap(0);
-        layout.setHgap(0);
+    private ArrayList<Location> locations = new ArrayList<>();
 
-        setLayout(layout);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        add(left);
-        add(right);
-        
-        setVisible(true);
+    public Simulator() {
+        Screen s = new Screen(this);
     }
-    
-    public ArrayList<Location> generateProducts(int amount) {
-        //Genereert random producten        
+
+    public void setLocations(ArrayList<Location> locations) {
+        this.locations = locations;
+    }
+
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> lokaties = new ArrayList<Location>();
+        Location een = new Location(5, 2);
+        Location twee = new Location(10, 7);
+        Location drie = new Location(7, 7);
+
+        lokaties.add(een);
+        lokaties.add(twee);
+        lokaties.add(drie);
+        return lokaties;
+    }
+
+    public ArrayList<Location> generateLocations(int X, int Y, int amount) {
+        if (locations.size() != 0) {
+            this.locations.clear();
+        }
+        for (int i = 0; i <= amount; i++) {
+            int randomX = (int) (Math.random() * (X - 1) + 2);
+            int randomY = (int) (Math.random() * (Y - 1) + 2);
+            Location newRandom = new Location(randomX, randomY);
+            locations.add(newRandom);
+        }
         return locations;
     }
-
-    //action preformed toevoegen zodat je wat kunt doen met de knoppen en texten
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
-
 }
-

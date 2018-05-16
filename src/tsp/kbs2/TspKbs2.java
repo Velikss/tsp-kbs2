@@ -19,28 +19,22 @@ public class TspKbs2 {
     public static void main(String[] args) {
         // TODO code application logic here
         ArrayList<Location> locations = new ArrayList<>();
-        Location een = new Location(5, 2);
-        Location twee = new Location(10, 7);
-        Location drie = new Location(5, 7);
+//        Location een = new Location(5, 2);
+//        Location twee = new Location(10, 7);
+//        Location drie = new Location(5, 7);
 
-        locations.add(een);
-        locations.add(twee);
-        locations.add(drie);
-        Simulator s = new Simulator(locations);
+//        locations.add(een);
+//        locations.add(twee);
+//        locations.add(drie);
+        for (int i = 0; i < 10; i++) {
+            int random1 = (int) (Math.random() * 8 + 2);
+            int random2 = (int) (Math.random() * 8 + 2);
+            Location newRandom = new Location(random1, random2);
+            locations.add(newRandom);
+        }
+//        System.out.println(locations);
+        Simulator a = new Simulator();
 
-//          NearestNeighbour one = new NearestNeighbour();
-//          
-//          ArrayList<Location> locs = new ArrayList<>();
-//          
-//          Location een = new Location(11, 2);
-//          Location twee = new Location(45, 7);
-//          Location drie = new Location(5, 30);
-//          
-//          locs.add(een);
-//          locs.add(twee);
-//          locs.add(drie);
-//          
-//          one.solve(locs);
     }
-    
+
 }

@@ -61,8 +61,21 @@ public class RightPanel extends JPanel implements ActionListener {
 
 //      Grid settings
         settings.add(new JLabel("Simulatie settings"));
+        
         settings.add(new JLabel("Aantal punten"));
         pointcount = new JSpinner();
+        pointcount.setValue(left.getPoints());
+        pointcount.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("Value changed to " + height.getValue());
+                int value = (Integer) pointcount.getValue();
+                left.setPoints(left.getXCoord(), value);
+                System.out.println("Points set to " + left.getPoints());
+                left.repaint();
+                System.out.println("Repainted!");
+            }
+        });
         settings.add(pointcount);
 
         settings.add(new JLabel("Hoogte"));
@@ -71,12 +84,9 @@ public class RightPanel extends JPanel implements ActionListener {
         height.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                System.out.println("Value changed to " + height.getValue());
                 int value = (Integer) height.getValue();
                 left.setYCoord(value);
-                System.out.println("Y coord set to " + left.getYCoord());
                 left.repaint();
-                System.out.println("Repainted!");
             }
         });
         settings.add(height);
@@ -88,12 +98,9 @@ public class RightPanel extends JPanel implements ActionListener {
         width.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                System.out.println("Value changed to " + width.getValue());
                 int value = (Integer) width.getValue();
                 left.setXCoord(value);
-                System.out.println("Y coord set to " + left.getXCoord());
                 left.repaint();
-                System.out.println("Repainted!");
             }
         });
         settings.add(width);

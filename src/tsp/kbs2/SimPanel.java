@@ -16,18 +16,19 @@ import javax.swing.*;
 public class SimPanel extends JPanel {
 
     private boolean grid;
-    private int X;
-    private int Y;
+    private int X, Y;
     private Algorithm algorithm;
+    private ArrayList<Location> route;
 
-    public SimPanel(Algorithm algorithm, boolean grid, int X, int Y) {
+    public SimPanel(Algorithm algorithm, boolean grid, int X, int Y, ArrayList<Location> route) {
         this.algorithm = algorithm;
         this.setPreferredSize(new Dimension(500, 390));
         this.grid = grid;
         this.X = X;
         this.Y = Y;
+        this.route = route;
 
-    }
+    }    
 
     @Override
     public void paintComponent(Graphics g) {
@@ -40,7 +41,7 @@ public class SimPanel extends JPanel {
         super.paintComponent(g);
         setBackground(Color.WHITE);
         g.setColor(Color.black);
-
+//      Draws grid
         if (grid) {
 //          Paints vertical lines
             for (int j = 1; j <= lengthX + 1; j += dimensionX) {
@@ -51,18 +52,8 @@ public class SimPanel extends JPanel {
                 g.drawLine(1, j, lengthX, j);
             }
         }
-        ArrayList<Location> locations = new ArrayList<>();
-        Location een = new Location(5, 2);
-        Location twee = new Location(10, 7);
-        Location drie = new Location(5, 7);
-
-        locations.add(een);
-        locations.add(twee);
-        locations.add(drie);
-
-        ArrayList<Location> route = algorithm.solve(locations);
         
-
+//      Draws locations
         for (Location a : route) {
             int X = ((a.xPosition * dimensionX) - dimensionX) + 1;
             int Y = (lengthY - (a.yPosition * dimensionY)) + 1;
@@ -72,6 +63,7 @@ public class SimPanel extends JPanel {
             g.fillRect(X, Y, dimensionX, dimensionY);
         }
 
+//      Draws lines
         for (int i = 1; i < route.size(); i++) {
             int X1 = (route.get(i - 1).xPosition * dimensionX) - (dimensionX / 2);
             int Y1 = (lengthY - (route.get(i - 1).yPosition * dimensionY)) + (dimensionY / 2);
@@ -102,4 +94,8 @@ public class SimPanel extends JPanel {
     public void setYCoord(int Y) {
         this.Y = Y;
     }
+
+    public void setRoute(ArrayList<Location> route) {
+        this.route = route;
+    }    
 }
