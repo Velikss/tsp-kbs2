@@ -17,7 +17,7 @@ public class NearestNeighbour extends Algorithm {
     }
 
     @Override
-    public ArrayList<Location> solve(ArrayList<Location> locations) {
+    public Route solve(ArrayList<Location> locations) {
         //Start timer        
         time = System.nanoTime();
         
@@ -39,7 +39,9 @@ public class NearestNeighbour extends Algorithm {
         time = (System.nanoTime() - time) / 1000000;
         System.out.println(route);
         System.out.println("Tijd:" + time);
-        return route;
+        
+        Route result = new Route(route);
+        return result;
     }
 
     private double calculateDistance(Location locA, Location locB) {

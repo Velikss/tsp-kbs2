@@ -5,6 +5,7 @@
 package tsp.kbs2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,9 +13,20 @@ import java.util.ArrayList;
  */
 public class Simulator {
 
-    private ArrayList<Location> locations = new ArrayList<>();
+    private ArrayList<Location> locations = new ArrayList<Location>();
+    private ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
+    private ArrayList<Route> results = new ArrayList<Route>();
+    private int X;
+    private int Y;
+    private int points;
 
     public Simulator() {
+        this.X = 13;
+        this.Y = 13;
+        this.points = 5;
+        this.generateLocations(12, 12, 5);
+        results.add(new Route(locations));
+        this.algorithms.add(new NearestNeighbour());
         Screen s = new Screen(this);
     }
 
@@ -34,7 +46,7 @@ public class Simulator {
         return lokaties;
     }
 
-    public ArrayList<Location> generateLocations(int X, int Y, int amount) {
+    public void generateLocations(int X, int Y, int amount) {
         if (locations.size() != 0) {
             this.locations.clear();
         }
@@ -44,6 +56,49 @@ public class Simulator {
             Location newRandom = new Location(randomX, randomY);
             locations.add(newRandom);
         }
-        return locations;
     }
+
+    public void simStart(ArrayList<Algorithm> algorithms) {
+        ArrayList<Route> results = new ArrayList<Route>();
+        for (Algorithm a : algorithms) {
+            results.add(a.solve(locations));
+        }
+        this.results = results;
+    }
+
+    public void setAmount(int amount) {
+        this.points = amount;
+    }
+
+    public void setX(int X) {
+        this.X = X;
+    }
+
+    public void setY(int Y) {
+        this.Y = Y;
+    }
+
+    public ArrayList<Route> getResults() {
+        return results;
+    }
+
+    public int getX() {
+        return X;
+    }
+
+    public int getY() {
+        return Y;
+    }
+    
+    public int getPoints() {
+        return points;
+    }
+
+    public ArrayList<Algorithm> getAlgorithms() {
+        return algorithms;
+    }
+    
+    
+    
+    
 }

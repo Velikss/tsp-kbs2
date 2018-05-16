@@ -23,8 +23,8 @@ public class Screen extends JFrame implements ActionListener {
     public Screen(Simulator sim) {
         this.simulator = sim;
         
-        LeftPanel left = new LeftPanel(simulator);
-        RightPanel right = new RightPanel(left);
+        LeftPanel left = new LeftPanel(sim);
+        RightPanel right = new RightPanel(sim, left);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("TSP Simulator");

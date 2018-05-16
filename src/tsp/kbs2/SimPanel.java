@@ -15,18 +15,17 @@ import javax.swing.*;
  */
 public class SimPanel extends JPanel {
 
+    private Route result;
     private boolean grid;
     private int X, Y;
     private Algorithm algorithm;
-    private ArrayList<Location> route;
 
-    public SimPanel(Algorithm algorithm, boolean grid, int X, int Y, ArrayList<Location> route) {
-        this.algorithm = algorithm;
-        this.setPreferredSize(new Dimension(500, 390));
+    public SimPanel(Route route, boolean grid, int X, int Y) {
+        this.result = route;
         this.grid = grid;
         this.X = X;
         this.Y = Y;
-        this.route = route;
+        this.setPreferredSize(new Dimension(500, 390));
 
     }    
 
@@ -54,6 +53,8 @@ public class SimPanel extends JPanel {
         }
         
 //      Draws locations
+        ArrayList<Location> route = new ArrayList<Location>();
+        route = result.getRoute();
         for (Location a : route) {
             int X = ((a.xPosition * dimensionX) - dimensionX) + 1;
             int Y = (lengthY - (a.yPosition * dimensionY)) + 1;
@@ -93,9 +94,5 @@ public class SimPanel extends JPanel {
 
     public void setYCoord(int Y) {
         this.Y = Y;
-    }
-
-    public void setRoute(ArrayList<Location> route) {
-        this.route = route;
-    }    
+    } 
 }

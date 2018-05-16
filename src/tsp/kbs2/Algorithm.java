@@ -12,56 +12,19 @@ import java.util.ArrayList;
  * @author Felix
  */
 public abstract class Algorithm {
-
+    
     protected long time;
     protected String name;
-    protected int simulatieNr;
-    protected float afstand;
     protected ArrayList<Location> locations = new ArrayList<>();
-    protected ArrayList<Location> route = new ArrayList<>();
+    protected Route result;
 
-    public ArrayList<Location> solve(ArrayList<Location> locations) {
-        return route;
-    }
-
-    public Long getTime() {
-        return time;
-    }
-
-    public void setTime(Long time) {
-        this.time = time;
-    }
-
-    public String getName() {
-        return name;
+    public Route solve(ArrayList<Location> locations) {
+        return result;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getSimulatieNr() {
-        return simulatieNr;
-    }
-
-    public void setSimulatieNr(int simulatieNr) {
-        this.simulatieNr = simulatieNr;
-    }
-
-    public float getAfstand() {
-        return afstand;
-    }
-
-    public void setAfstand(float afstand) {
-        this.afstand = afstand;
-    }
-
-    public ArrayList<Location> getProducts() {
-        return locations;
-    }
-
-    public void setProducts(ArrayList<Location> products) {
-        this.locations = products;
-    }
-
+    
+    
 }

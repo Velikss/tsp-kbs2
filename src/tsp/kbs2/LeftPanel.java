@@ -19,76 +19,41 @@ public class LeftPanel extends JPanel implements ActionListener {
     public Simulator simulator;
     private SimPanel Weightedtwoopt, Twoopt, Bruteforce, NearestNeighbour;
 //    private ArrayList<Location> locations;
-    private int X, Y, points;
+    private int X, Y;
 
     public LeftPanel(Simulator sim) {
         this.simulator = sim;
-        this.X = 13;
-        this.Y = 13;
-        this.points = 4;
+        this.X = sim.getX();
+        this.Y = sim.getY();
         
         setPreferredSize(new Dimension(1100, 800));
-//        setLayout(new GridLayout(4, 2));
         setLayout(new FlowLayout());
 
         //Initializing SimPanels
-        ArrayList<Location> locations = simulator.generateLocations(this.X, this.Y, this.points);
+//        ArrayList<Location> locations = simulator.generateLocations(this.X, this.Y, this.points);
         
-        Algorithm NearestNeighbourAlgorithm = new NearestNeighbour();
-        ArrayList<Location> NearestNeighbourRoute = NearestNeighbourAlgorithm.solve(locations);        
-        Weightedtwoopt = new SimPanel(NearestNeighbourAlgorithm, true, X, Y, NearestNeighbourRoute);
+//        Algorithm NearestNeighbourAlgorithm = new NearestNeighbour();
+//        ArrayList<Location> NearestNeighbourRoute = NearestNeighbourAlgorithm.solve(locations); 
+//        simulator.simStart(simulator.getAlgorithms());
+
+        Weightedtwoopt = new SimPanel(simulator.getResults().get(0), true, X, Y);
         Weightedtwoopt.add(new JLabel("<html><font color='blue'>Visualisatie Weighted Two Opt</font></html>"));
         add(Weightedtwoopt);
 
-        Twoopt = new SimPanel(NearestNeighbourAlgorithm, true, X, Y, NearestNeighbourRoute);
+        Twoopt = new SimPanel(simulator.getResults().get(0), true, X, Y);
         Twoopt.add(new JLabel("<html><font color='blue'>Visualisatie 2 opt</font></html>"));
         add(Twoopt);
 
-        Bruteforce = new SimPanel(NearestNeighbourAlgorithm, true, X, Y, NearestNeighbourRoute);
+        Bruteforce = new SimPanel(simulator.getResults().get(0), true, X, Y);
         Bruteforce.add(new JLabel("<html><font color='blue'>Visualisatie Bruteforce</font></html>"));
         add(Bruteforce);
 
-        NearestNeighbour = new SimPanel(NearestNeighbourAlgorithm, true, X, Y, NearestNeighbourRoute);
+        NearestNeighbour = new SimPanel(simulator.getResults().get(0), true, X, Y);
         NearestNeighbour.add(new JLabel("<html><font color='blue'>Visualisatie Nearest Neighbour</font></html>"));
         add(NearestNeighbour);
     }
 
-    public void setXCoord(int X) {
-        this.X = X;
-        Weightedtwoopt.setXCoord(X);
-        Twoopt.setXCoord(X);
-        Bruteforce.setXCoord(X);
-        NearestNeighbour.setXCoord(X);
-    }
-
-    public void setYCoord(int Y) {
-        this.Y = Y;
-        Weightedtwoopt.setYCoord(Y);
-        Twoopt.setYCoord(Y);
-        Bruteforce.setYCoord(Y);
-        NearestNeighbour.setYCoord(Y);
-    }
-
-    public int getXCoord() {
-        return Weightedtwoopt.getXCoord();
-    }
-
-    public int getYCoord() {
-        return Weightedtwoopt.getYCoord();
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int max, int points) {
-        ArrayList<Location> locations = simulator.generateLocations(this.X, this.Y, this.points);
-        this.points = points;
-        Weightedtwoopt.setRoute(locations);
-        Twoopt.setRoute(locations);
-        Bruteforce.setRoute(locations);
-        NearestNeighbour.setRoute(locations);
-    }
+    
     
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
@@ -23,10 +24,13 @@ public class RightPanel extends JPanel implements ActionListener {
     private JPanel settings;
     private JTextArea infoBox;
     private JScrollPane scroll;
+    private JButton startSimulation;
     private JSpinner simcount, pointcount, height, width;
     private JCheckBox bruteforcecheck, twooptcheck, nearestneighbourcheck, weightedtwooptcheck;
+    private Simulator simulator;
 
-    public RightPanel(LeftPanel left) {
+    public RightPanel(Simulator sim, LeftPanel left) {
+        this.simulator = sim;
         setPreferredSize(new Dimension(250, 800));
         setLayout(new BorderLayout());
 
@@ -64,28 +68,25 @@ public class RightPanel extends JPanel implements ActionListener {
         
         settings.add(new JLabel("Aantal punten"));
         pointcount = new JSpinner();
-        pointcount.setValue(left.getPoints());
+        pointcount.setValue(simulator.getPoints());
         pointcount.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                System.out.println("Value changed to " + height.getValue());
                 int value = (Integer) pointcount.getValue();
-                left.setPoints(left.getXCoord(), value);
-                System.out.println("Points set to " + left.getPoints());
-                left.repaint();
-                System.out.println("Repainted!");
+                simulator.setAmount(value);
+                System.out.println("Set simulator point amount to: " + value);
             }
         });
         settings.add(pointcount);
 
         settings.add(new JLabel("Hoogte"));
         height = new JSpinner();
-        height.setValue(left.getYCoord());
+        height.setValue(simulator.getY());
         height.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 int value = (Integer) height.getValue();
-                left.setYCoord(value);
+                simulator.setY(value);
                 left.repaint();
             }
         });
@@ -93,17 +94,21 @@ public class RightPanel extends JPanel implements ActionListener {
 
         settings.add(new JLabel("Breedte"));
         width = new JSpinner();
-        int panelWidth = left.getXCoord();
+        int panelWidth = simulator.getX();
         width.setValue(panelWidth);
         width.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 int value = (Integer) width.getValue();
-                left.setXCoord(value);
+                simulator.setX(value);
                 left.repaint();
             }
         });
         settings.add(width);
+        
+        startSimulation = new JButton("Start simulatie");
+        settings.add(startSimulation);
+        startSimulation.addActionListener(this);
 
         add(settings, BorderLayout.PAGE_START);
 
@@ -119,5 +124,10 @@ public class RightPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == startSimulation) {
+            ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
+            algorithms.add(new NearestNeighbour());
+            simulator.simStart(algorithms);
+        }
     }
 }
