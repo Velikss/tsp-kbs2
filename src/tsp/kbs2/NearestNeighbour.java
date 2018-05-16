@@ -19,10 +19,11 @@ public class NearestNeighbour extends Algorithm {
     @Override
     public ArrayList<Location> solve(ArrayList<Location> locations) {
         //Start timer        
-        time = System.nanoTime() / 1000;
+        time = System.nanoTime();
         
         //Algorithm        
         ArrayList<Location> route = new ArrayList<>();
+        //Add start location
         Location startLocation = new Location (0, 0);
         route.add(startLocation);
         
@@ -31,9 +32,11 @@ public class NearestNeighbour extends Algorithm {
             route.add(nearest);
             locations.remove(nearest);
         }
+        //Add end location        
         route.add(new Location(0, 0));
+        
         //End timer        
-        time = (System.nanoTime() / 1000) - time;
+        time = (System.nanoTime() - time) / 1000000;
         System.out.println(route);
         System.out.println("Tijd:" + time);
         return route;
