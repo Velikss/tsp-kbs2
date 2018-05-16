@@ -87,7 +87,7 @@ public class RightPanel extends JPanel implements ActionListener {
             public void stateChanged(ChangeEvent e) {
                 int value = (Integer) height.getValue();
                 simulator.setY(value);
-                left.repaint();
+                left.refreshY(value);
             }
         });
         settings.add(height);
@@ -101,7 +101,7 @@ public class RightPanel extends JPanel implements ActionListener {
             public void stateChanged(ChangeEvent e) {
                 int value = (Integer) width.getValue();
                 simulator.setX(value);
-                left.repaint();
+                left.refreshX(value);
             }
         });
         settings.add(width);

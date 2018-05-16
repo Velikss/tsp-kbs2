@@ -23,10 +23,12 @@ public class Simulator {
     public Simulator() {
         this.X = 13;
         this.Y = 13;
-        this.points = 5;
-        this.generateLocations(12, 12, 5);
-        results.add(new Route(locations));
-        this.algorithms.add(new NearestNeighbour());
+        this.points = 6;
+        
+//        this.generateLocations(this.X, this.Y, this.points);
+//        results.add(new Route(locations));
+//        this.algorithms.add(new NearestNeighbour());
+
         Screen s = new Screen(this);
     }
 

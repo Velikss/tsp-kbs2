@@ -19,12 +19,14 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class Screen extends JFrame implements ActionListener {
 
     public Simulator simulator;
+    private LeftPanel left;
+    private RightPanel right;
 
     public Screen(Simulator sim) {
         this.simulator = sim;
         
-        LeftPanel left = new LeftPanel(sim);
-        RightPanel right = new RightPanel(sim, left);
+        this.left = new LeftPanel(sim);
+        this.right = new RightPanel(sim, left);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("TSP Simulator");
@@ -45,6 +47,11 @@ public class Screen extends JFrame implements ActionListener {
     //action preformed toevoegen zodat je wat kunt doen met de knoppen en texten
     @Override
     public void actionPerformed(ActionEvent e) {
+    }
+    
+    public void screenRepaint() {
+        repaint();
+        left.repaint();
     }
 
 }
