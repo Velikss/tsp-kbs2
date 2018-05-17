@@ -21,26 +21,44 @@ public class Simulator {
     private int points;
 
     public Simulator() {
-        this.X = 13;
-        this.Y = 13;
-        this.points = 6;
-        
+        this.X = 4;
+        this.Y = 4;
+        this.points = 3;
+
         this.generateLocations(this.X, this.Y, this.points);
         results.add(new Route(locations));
+
+        algorithms.add(new NearestNeighbour());
+        algorithms.add(new NearestNeighbour());
+        algorithms.add(new NearestNeighbour());
+        algorithms.add(new NearestNeighbour());
 
         Screen s = new Screen(this);
     }
 
     public void generateLocations(int X, int Y, int amount) {
-        if (locations.size() != 0) {
-            this.locations.clear();
-        }
+        this.locations.clear();
+
         for (int i = 1; i <= amount; i++) {
+            boolean alreadyExists = false;
             int randomX = (int) (Math.random() * (X - 1) + 2);
             int randomY = (int) (Math.random() * (Y - 1) + 2);
             Location newRandom = new Location(randomX, randomY);
             System.out.println(i + " : " + newRandom);
-            locations.add(newRandom);
+            
+            for (Location a : locations) {
+                if(newRandom.equals(a)) {
+                    alreadyExists = true;
+                } 
+            }
+            
+            if (alreadyExists) {
+                System.out.println("Location already exists.");
+                i--;
+                System.out.println("Generating new one...");
+            } else {
+                locations.add(newRandom);
+            }
         }
         System.out.println(locations + " : " + locations.size());
     }
@@ -53,8 +71,8 @@ public class Simulator {
         }
         this.results = results;
     }
-    
-    public Route getRoute(int a){
+
+    public Route getRoute(int a) {
         return this.results.get(a);
     }
 
@@ -81,7 +99,7 @@ public class Simulator {
     public int getY() {
         return Y;
     }
-    
+
     public int getPoints() {
         return points;
     }
@@ -89,8 +107,5 @@ public class Simulator {
     public ArrayList<Algorithm> getAlgorithms() {
         return algorithms;
     }
-    
-    
-    
-    
+
 }

@@ -18,6 +18,7 @@ public class Location {
         this.yPosition = y;
     }
 
+    
     public int getPositionX() {
         return xPosition;
     }
@@ -25,7 +26,7 @@ public class Location {
     public int getPositionY() {
         return yPosition;
     }
-
+    
     
     @Override
     public String toString() {

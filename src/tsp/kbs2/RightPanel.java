@@ -119,7 +119,7 @@ public class RightPanel extends JPanel implements ActionListener {
         infoBox.setFont(new Font("Serif", Font.ITALIC, 16));
         infoBox.setLineWrap(true);
         infoBox.setWrapStyleWord(true);
-        //comLog.setEditable(false);
+        //infoBox.setEditable(false);
         scroll = new JScrollPane(infoBox);
         add(scroll, BorderLayout.CENTER);
     }
@@ -131,6 +131,10 @@ public class RightPanel extends JPanel implements ActionListener {
             algorithms.add(new NearestNeighbour());
             simulator.simStart(algorithms);
             left.refresh(simulator);
+            
+            for (Algorithm a : algorithms) {
+                
+            }
         }
     }
 }

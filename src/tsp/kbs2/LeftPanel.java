@@ -18,7 +18,6 @@ public class LeftPanel extends JPanel implements ActionListener {
 
     public Simulator simulator;
     private SimPanel Weightedtwoopt, Twoopt, Bruteforce, NearestNeighbour;
-//    private ArrayList<Location> locations;
     private int X, Y;
 
     public LeftPanel(Simulator sim) {
