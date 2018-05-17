@@ -28,9 +28,11 @@ public class RightPanel extends JPanel implements ActionListener {
     private JSpinner simcount, pointcount, height, width;
     private JCheckBox bruteforcecheck, twooptcheck, nearestneighbourcheck, weightedtwooptcheck;
     private Simulator simulator;
+    private LeftPanel left;
 
     public RightPanel(Simulator sim, LeftPanel left) {
         this.simulator = sim;
+        this.left = left;
         setPreferredSize(new Dimension(250, 800));
         setLayout(new BorderLayout());
 
@@ -128,6 +130,7 @@ public class RightPanel extends JPanel implements ActionListener {
             ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
             algorithms.add(new NearestNeighbour());
             simulator.simStart(algorithms);
+            left.refresh(simulator);
         }
     }
 }

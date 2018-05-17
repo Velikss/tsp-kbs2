@@ -20,5 +20,4 @@ public class TspKbs2 {
         // TODO code application logic here
         Simulator a = new Simulator();
     }
-
 }

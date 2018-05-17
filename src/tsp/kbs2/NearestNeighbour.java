@@ -18,6 +18,7 @@ public class NearestNeighbour extends Algorithm {
 
     @Override
     public Route solve(ArrayList<Location> locations) {
+        int size = locations.size();
         //Start timer        
         time = System.nanoTime();
         
@@ -27,7 +28,7 @@ public class NearestNeighbour extends Algorithm {
         Location startLocation = new Location (0, 0);
         route.add(startLocation);
         
-        for (int i = 0; i <= (locations.size()+2); i++) {
+        for (int i = 0; i < size; i++) {
             Location nearest = findNearest(locations, route.get(i));
             route.add(nearest);
             locations.remove(nearest);
@@ -37,8 +38,8 @@ public class NearestNeighbour extends Algorithm {
         
         //End timer        
         time = (System.nanoTime() - time) / 1000000;
-        System.out.println(route);
-        System.out.println("Tijd:" + time);
+        System.out.println("Nearest Neighbour route: " + route + "Size: " + (route.size()-2));
+//        System.out.println("Tijd:" + time);
         
         Route result = new Route(route);
         return result;

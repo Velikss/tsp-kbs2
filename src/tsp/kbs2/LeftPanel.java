@@ -30,30 +30,35 @@ public class LeftPanel extends JPanel implements ActionListener {
         setLayout(new FlowLayout());
 
         //Initializing SimPanels
-        if (simulator.getResults().size() == 0) {
-            add(new JLabel("No results to display"));
-        } else {
-            Weightedtwoopt = new SimPanel(simulator.getResults().get(0), true, X, Y);
-            Weightedtwoopt.add(new JLabel("<html><font color='blue'>Visualisatie Weighted Two Opt</font></html>"));
-            add(Weightedtwoopt);
+        Weightedtwoopt = new SimPanel(sim, 0);
+        Weightedtwoopt.add(new JLabel("<html><font color='blue'>Visualisatie Weighted Two Opt</font></html>"));
+        add(Weightedtwoopt);
 
-            Twoopt = new SimPanel(simulator.getResults().get(0), true, X, Y);
-            Twoopt.add(new JLabel("<html><font color='blue'>Visualisatie 2 opt</font></html>"));
-            add(Twoopt);
+        Twoopt = new SimPanel(sim, 0);
+        Twoopt.add(new JLabel("<html><font color='blue'>Visualisatie 2 opt</font></html>"));
+        add(Twoopt);
 
-            Bruteforce = new SimPanel(simulator.getResults().get(0), true, X, Y);
-            Bruteforce.add(new JLabel("<html><font color='blue'>Visualisatie Bruteforce</font></html>"));
-            add(Bruteforce);
+        Bruteforce = new SimPanel(sim, 0);
+        Bruteforce.add(new JLabel("<html><font color='blue'>Visualisatie Bruteforce</font></html>"));
+        add(Bruteforce);
 
-            NearestNeighbour = new SimPanel(simulator.getResults().get(0), true, X, Y);
-            NearestNeighbour.add(new JLabel("<html><font color='blue'>Visualisatie Nearest Neighbour</font></html>"));
-            add(NearestNeighbour);
-        }
+        NearestNeighbour = new SimPanel(sim, 0);
+        NearestNeighbour.add(new JLabel("<html><font color='blue'>Visualisatie Nearest Neighbour</font></html>"));
+        add(NearestNeighbour);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+    
+    public void refresh(Simulator s) {
+        Weightedtwoopt.setRoute(s.getRoute(0));
+        Twoopt.setRoute(s.getRoute(0));
+        Bruteforce.setRoute(s.getRoute(0));
+        NearestNeighbour.setRoute(s.getRoute(0));
+        repaint();
     }
 
     public void refreshY(int Y) {

@@ -15,19 +15,19 @@ import javax.swing.*;
  */
 public class SimPanel extends JPanel {
 
+    private Simulator simulator;
     private Route result;
-    private boolean grid;
     private int X, Y;
     private Algorithm algorithm;
 
-    public SimPanel(Route route, boolean grid, int X, int Y) {
-        this.result = route;
-        this.grid = grid;
-        this.X = X;
-        this.Y = Y;
+    public SimPanel(Simulator sim, int algorithm) {
+        this.simulator = sim;
+        this.result = sim.getRoute(algorithm);
+        this.X = sim.getX();
+        this.Y = sim.getY();
         this.setPreferredSize(new Dimension(500, 390));
 
-    }    
+    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -40,42 +40,41 @@ public class SimPanel extends JPanel {
         super.paintComponent(g);
         setBackground(Color.WHITE);
         g.setColor(Color.black);
-//      Draws grid
-        if (grid) {
-//          Paints vertical lines
-            for (int j = 1; j <= lengthX + 1; j += dimensionX) {
-                g.drawLine(j, 1, j, lengthY);
-            }
-//          Paints horizontal lines
-            for (int j = 1; j <= lengthY + 1; j += dimensionY) {
-                g.drawLine(1, j, lengthX, j);
-            }
-        }
-        
-//      Draws locations
-        ArrayList<Location> route = new ArrayList<Location>();
-        route = result.getRoute();
-        for (Location a : route) {
-            int X = ((a.xPosition * dimensionX) - dimensionX) + 1;
-            int Y = (lengthY - (a.yPosition * dimensionY)) + 1;
 
-//          Fill rectangle at location a
-            g.setColor(Color.red);
-            g.fillRect(X, Y, dimensionX, dimensionY);
+//Draws grid
+        //Paints vertical lines
+        for (int j = 1; j <= lengthX + 1; j += dimensionX) {
+            g.drawLine(j, 1, j, lengthY);
+        }
+        //Paints horizontal lines
+        for (int j = 1; j <= lengthY + 1; j += dimensionY) {
+            g.drawLine(1, j, lengthX, j);
         }
 
-//      Draws lines
-        for (int i = 1; i < route.size(); i++) {
-            int X1 = (route.get(i - 1).xPosition * dimensionX) - (dimensionX / 2);
-            int Y1 = (lengthY - (route.get(i - 1).yPosition * dimensionY)) + (dimensionY / 2);
-//            
-            int X2 = (route.get(i).xPosition * dimensionX) - (dimensionX / 2);
-            int Y2 = (lengthY - (route.get(i).yPosition * dimensionY)) + (dimensionY / 2);
+//Draws route
+        if (result.getRoute().size() != 0) {
+            ArrayList<Location> route = result.getRoute();
+            //Fill rectangle at location a
+            for (Location a : route) {
+                int X = ((a.xPosition * dimensionX) - dimensionX) + 1;
+                int Y = (lengthY - (a.yPosition * dimensionY)) + 1;
+                g.setColor(Color.red);
+                g.fillRect(X, Y, dimensionX, dimensionY);
+            }
 
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND));
-            g.setColor(Color.blue);
-            g.drawLine(X1, Y1, X2, Y2);
+            //Draws lines
+            for (int i = 1; i < route.size(); i++) {
+                int X1 = (route.get(i - 1).xPosition * dimensionX) - (dimensionX / 2);
+                int Y1 = (lengthY - (route.get(i - 1).yPosition * dimensionY)) + (dimensionY / 2);
+
+                int X2 = (route.get(i).xPosition * dimensionX) - (dimensionX / 2);
+                int Y2 = (lengthY - (route.get(i).yPosition * dimensionY)) + (dimensionY / 2);
+
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND));
+                g.setColor(Color.blue);
+                g.drawLine(X1, Y1, X2, Y2);
+            }
         }
 
     }
@@ -94,5 +93,11 @@ public class SimPanel extends JPanel {
 
     public void setYCoord(int Y) {
         this.Y = Y;
-    } 
+    }
+
+    public void setRoute(Route r) {
+        this.result = r;
+    }
+    
+    
 }

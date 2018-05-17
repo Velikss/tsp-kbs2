@@ -25,47 +25,37 @@ public class Simulator {
         this.Y = 13;
         this.points = 6;
         
-//        this.generateLocations(this.X, this.Y, this.points);
-//        results.add(new Route(locations));
-//        this.algorithms.add(new NearestNeighbour());
+        this.generateLocations(this.X, this.Y, this.points);
+        results.add(new Route(locations));
 
         Screen s = new Screen(this);
-    }
-
-    public void setLocations(ArrayList<Location> locations) {
-        this.locations = locations;
-    }
-
-    public ArrayList<Location> getLocations() {
-        ArrayList<Location> lokaties = new ArrayList<Location>();
-        Location een = new Location(5, 2);
-        Location twee = new Location(10, 7);
-        Location drie = new Location(7, 7);
-
-        lokaties.add(een);
-        lokaties.add(twee);
-        lokaties.add(drie);
-        return lokaties;
     }
 
     public void generateLocations(int X, int Y, int amount) {
         if (locations.size() != 0) {
             this.locations.clear();
         }
-        for (int i = 0; i <= amount; i++) {
+        for (int i = 1; i <= amount; i++) {
             int randomX = (int) (Math.random() * (X - 1) + 2);
             int randomY = (int) (Math.random() * (Y - 1) + 2);
             Location newRandom = new Location(randomX, randomY);
+            System.out.println(i + " : " + newRandom);
             locations.add(newRandom);
         }
+        System.out.println(locations + " : " + locations.size());
     }
 
     public void simStart(ArrayList<Algorithm> algorithms) {
         ArrayList<Route> results = new ArrayList<Route>();
+        this.generateLocations(X, Y, points);
         for (Algorithm a : algorithms) {
             results.add(a.solve(locations));
         }
         this.results = results;
+    }
+    
+    public Route getRoute(int a){
+        return this.results.get(a);
     }
 
     public void setAmount(int amount) {
