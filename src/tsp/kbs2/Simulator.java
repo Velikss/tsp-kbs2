@@ -27,6 +27,9 @@ public class Simulator {
 
         this.generateLocations(this.X, this.Y, this.points);
         results.add(new Route(locations));
+        results.add(new Route(locations));
+        results.add(new Route(locations));
+        results.add(new Route(locations));
 
         algorithms.add(new NearestNeighbour());
         algorithms.add(new NearestNeighbour());

@@ -41,7 +41,7 @@ public class NearestNeighbour extends Algorithm {
         System.out.println("Nearest Neighbour route: " + route + "Size: " + (route.size()-2));
 //        System.out.println("Tijd:" + time);
         
-        Route result = new Route(route);
+        this.result = new Route(route);
         return result;
     }
 

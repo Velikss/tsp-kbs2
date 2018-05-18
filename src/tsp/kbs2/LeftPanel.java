@@ -17,7 +17,8 @@ import java.util.ArrayList;
 public class LeftPanel extends JPanel implements ActionListener {
 
     public Simulator simulator;
-    private SimPanel Weightedtwoopt, Twoopt, Bruteforce, NearestNeighbour;
+    private ArrayList<SimPanel> panels;
+    private SimPanel Weightedtwoopt, Twoopt, Bruteforce, NearestNeighbour, Simpanel0, Simpanel1, Simpanel2, Simpanel3;
     private int X, Y;
 
     public LeftPanel(Simulator sim) {
@@ -28,22 +29,39 @@ public class LeftPanel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(1100, 800));
         setLayout(new FlowLayout());
 
+        
         //Initializing SimPanels
-        Weightedtwoopt = new SimPanel(sim, 0);
-        Weightedtwoopt.add(new JLabel("<html><font color='blue'>Visualisatie Weighted Two Opt</font></html>"));
-        add(Weightedtwoopt);
-
-        Twoopt = new SimPanel(sim, 0);
-        Twoopt.add(new JLabel("<html><font color='blue'>Visualisatie 2 opt</font></html>"));
-        add(Twoopt);
-
-        Bruteforce = new SimPanel(sim, 0);
-        Bruteforce.add(new JLabel("<html><font color='blue'>Visualisatie Bruteforce</font></html>"));
-        add(Bruteforce);
-
-        NearestNeighbour = new SimPanel(sim, 0);
-        NearestNeighbour.add(new JLabel("<html><font color='blue'>Visualisatie Nearest Neighbour</font></html>"));
-        add(NearestNeighbour);
+        Simpanel0 = new SimPanel(sim, 0);
+        Simpanel0.add(new JLabel(sim.getAlgorithms().get(0).name));
+        add(Simpanel0);
+        
+        Simpanel1 = new SimPanel(sim, 1);
+        Simpanel1.add(new JLabel(sim.getAlgorithms().get(1).name));
+        add(Simpanel1);
+        
+        Simpanel2 = new SimPanel(sim, 2);
+        Simpanel2.add(new JLabel(sim.getAlgorithms().get(2).name));
+        add(Simpanel2);
+        
+        Simpanel3 = new SimPanel(sim, 3);
+        Simpanel3.add(new JLabel(sim.getAlgorithms().get(3).name));
+        add(Simpanel3);
+        
+//        Weightedtwoopt = new SimPanel(sim, 0);
+//        Weightedtwoopt.add(new JLabel("<html><font color='blue'>Visualisatie Weighted Two Opt</font></html>"));
+//        add(Weightedtwoopt);
+//
+//        Twoopt = new SimPanel(sim, 0);
+//        Twoopt.add(new JLabel("<html><font color='blue'>Visualisatie 2 opt</font></html>"));
+//        add(Twoopt);
+//
+//        Bruteforce = new SimPanel(sim, 0);
+//        Bruteforce.add(new JLabel("<html><font color='blue'>Visualisatie Bruteforce</font></html>"));
+//        add(Bruteforce);
+//
+//        NearestNeighbour = new SimPanel(sim, 0);
+//        NearestNeighbour.add(new JLabel("<html><font color='blue'>Visualisatie Nearest Neighbour</font></html>"));
+//        add(NearestNeighbour);
 
     }
 
@@ -53,18 +71,18 @@ public class LeftPanel extends JPanel implements ActionListener {
     }
     
     public void refresh(Simulator s) {
-        Weightedtwoopt.setRoute(s.getRoute(0));
-        Twoopt.setRoute(s.getRoute(0));
-        Bruteforce.setRoute(s.getRoute(0));
-        NearestNeighbour.setRoute(s.getRoute(0));
+        Simpanel0.setRoute(s.getRoute(0));
+        Simpanel1.setRoute(s.getRoute(0));
+        Simpanel2.setRoute(s.getRoute(0));
+        Simpanel3.setRoute(s.getRoute(0));
         repaint();
     }
 
     public void refreshY(int Y) {
-        Weightedtwoopt.setYCoord(Y);
-        Twoopt.setYCoord(Y);
-        Bruteforce.setYCoord(Y);
-        NearestNeighbour.setYCoord(Y);
+        Simpanel0.setYCoord(Y);
+        Simpanel1.setYCoord(Y);
+        Simpanel2.setYCoord(Y);
+        Simpanel3.setYCoord(Y);
         repaint();
     }
 
