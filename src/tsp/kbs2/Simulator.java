@@ -21,9 +21,9 @@ public class Simulator {
     private int points;
 
     public Simulator() {
-        this.X = 11;
-        this.Y = 11;
-        this.points = 4;
+        this.X = 5;
+        this.Y = 5;
+        this.points = 24;
 
         this.generateLocations(this.X, this.Y, this.points);
         results.add(new Route(locations));
@@ -44,8 +44,8 @@ public class Simulator {
 
         for (int i = 1; i <= amount; i++) {
             boolean alreadyExists = false;
-            int randomX = (int) (Math.random() * (X - 1) + 2);
-            int randomY = (int) (Math.random() * (Y - 1) + 2);
+            int randomX = (int) (Math.random() * (X - 1) + 1.5);
+            int randomY = (int) (Math.random() * (Y - 1) + 1.5);
             Location newRandom = new Location(randomX, randomY);
             
             for (Location a : locations) {
@@ -76,7 +76,7 @@ public class Simulator {
         return this.results.get(a);
     }
 
-    public void setAmount(int amount) {
+    public void setPoints(int amount) {
         this.points = amount;
     }
 

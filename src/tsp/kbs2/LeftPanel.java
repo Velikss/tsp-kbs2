@@ -87,10 +87,10 @@ public class LeftPanel extends JPanel implements ActionListener {
     }
 
     public void refreshX(int X) {
-        Weightedtwoopt.setXCoord(X);
-        Twoopt.setXCoord(X);
-        Bruteforce.setXCoord(X);
-        NearestNeighbour.setXCoord(X);
+        Simpanel0.setXCoord(X);
+        Simpanel1.setXCoord(X);
+        Simpanel2.setXCoord(X);
+        Simpanel3.setXCoord(X);
         repaint();
     }
 }

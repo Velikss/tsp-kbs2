@@ -69,21 +69,27 @@ public class RightPanel extends JPanel implements ActionListener {
         settings.add(new JLabel("Simulatie settings"));
         
         settings.add(new JLabel("Aantal punten"));
-        pointcount = new JSpinner();
-        pointcount.setValue(simulator.getPoints());
+        SpinnerModel pcm = new SpinnerNumberModel(simulator.getPoints(), 2, 9025, 1);
+        pointcount = new JSpinner(pcm);
         pointcount.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 int value = (Integer) pointcount.getValue();
-                simulator.setAmount(value);
+                //Check if points fit in grid, if not set back to previous value
+                if(value > (simulator.getX() * simulator.getY())) {
+                    infoBox.append(value + " points don't fit in the grid!\n");
+                    value = simulator.getPoints();
+                }
+                simulator.setPoints(value);
                 System.out.println("Set simulator point amount to: " + value);
+                pointcount.setValue(simulator.getPoints());
             }
         });
         settings.add(pointcount);
 
         settings.add(new JLabel("Hoogte"));
-        height = new JSpinner();
-        height.setValue(simulator.getY());
+        SpinnerModel heightModel = new SpinnerNumberModel(simulator.getY(), 2, 95, 1);
+        height = new JSpinner(heightModel);
         height.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -95,7 +101,8 @@ public class RightPanel extends JPanel implements ActionListener {
         settings.add(height);
 
         settings.add(new JLabel("Breedte"));
-        width = new JSpinner();
+        SpinnerModel widthModel = new SpinnerNumberModel(simulator.getX(), 2, 95, 1);
+        width = new JSpinner(widthModel);
         int panelWidth = simulator.getX();
         width.setValue(panelWidth);
         width.addChangeListener(new ChangeListener() {
