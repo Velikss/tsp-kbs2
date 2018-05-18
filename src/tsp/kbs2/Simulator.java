@@ -21,9 +21,9 @@ public class Simulator {
     private int points;
 
     public Simulator() {
-        this.X = 4;
-        this.Y = 4;
-        this.points = 3;
+        this.X = 11;
+        this.Y = 11;
+        this.points = 4;
 
         this.generateLocations(this.X, this.Y, this.points);
         results.add(new Route(locations));
@@ -44,7 +44,6 @@ public class Simulator {
             int randomX = (int) (Math.random() * (X - 1) + 2);
             int randomY = (int) (Math.random() * (Y - 1) + 2);
             Location newRandom = new Location(randomX, randomY);
-            System.out.println(i + " : " + newRandom);
             
             for (Location a : locations) {
                 if(newRandom.equals(a)) {
@@ -53,9 +52,7 @@ public class Simulator {
             }
             
             if (alreadyExists) {
-                System.out.println("Location already exists.");
                 i--;
-                System.out.println("Generating new one...");
             } else {
                 locations.add(newRandom);
             }

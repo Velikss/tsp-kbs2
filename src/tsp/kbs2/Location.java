@@ -26,7 +26,31 @@ public class Location {
     public int getPositionY() {
         return yPosition;
     }
-    
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Location other = (Location) obj;
+        if (this.xPosition != other.xPosition) {
+            return false;
+        }
+        if (this.yPosition != other.yPosition) {
+            return false;
+        }
+        if(this.toString().equals(obj.toString())) {
+            return true;
+        }
+        return true;
+    }  
     
     @Override
     public String toString() {
