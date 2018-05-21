@@ -94,7 +94,13 @@ public class RightPanel extends JPanel implements ActionListener {
             @Override
             public void stateChanged(ChangeEvent e) {
                 int value = (Integer) height.getValue();
+                //Check if there is enough room for the points
+                if (value * simulator.getX() < simulator.getPoints()) {
+                    infoBox.append("Please select less points first!\n");
+                    value = simulator.getY();
+                }
                 simulator.setY(value);
+                height.setValue(simulator.getY());
                 left.refreshY(value);
             }
         });
@@ -109,7 +115,13 @@ public class RightPanel extends JPanel implements ActionListener {
             @Override
             public void stateChanged(ChangeEvent e) {
                 int value = (Integer) width.getValue();
+                //Check if there is enough room for the points
+                if (value * simulator.getY() < simulator.getPoints()) {
+                    infoBox.append("Please select less points first!\n");
+                    value = simulator.getX();
+                }
                 simulator.setX(value);
+                width.setValue(simulator.getX());
                 left.refreshX(value);
             }
         });
