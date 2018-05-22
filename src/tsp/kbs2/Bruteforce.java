@@ -5,12 +5,15 @@
 package tsp.kbs2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
  * @author Felix
  */
 public class Bruteforce extends Algorithm {
+
+    private ArrayList<Location> newBestRoute = new ArrayList<Location>();
 
     public Bruteforce() {
         super.setName("Bruteforce algorithm");
@@ -21,18 +24,37 @@ public class Bruteforce extends Algorithm {
         //Start timer
         time = System.nanoTime();
 
-        ArrayList<Location> route = new ArrayList<>();
-
         int options = calculateOptions(locations.size());
 
         //Algorithm
-        for (int i = 1; i < options; i++) {
-            
-        }
-        //Add start location
-        Location startLocation = new Location(0, 0);
-        route.add(startLocation);
+        loop(locations, locations.size());
+        this.result = new Route(newBestRoute);
         return result;
+    }
+
+    public void loop(ArrayList<Location> locations, int a) {
+        double distance = 999999999;
+        if (a == 1) {
+            return;
+        }
+        for (int i = 0; i < a; i++) {
+            Collections.swap(locations, i, a - 1);
+            
+            if(getTotalDistance(locations) < distance) {
+                newBestRoute = locations;
+                distance = getTotalDistance(locations);
+            }
+            
+            loop(locations, a - 1);
+            
+            Collections.swap(locations, i, a - 1);
+            
+            if(getTotalDistance(locations) < distance) {
+                newBestRoute = locations;
+                distance = getTotalDistance(locations);
+            }
+        }
+        this.distance = distance;
     }
 
     public int calculateOptions(int points) {
@@ -43,7 +65,7 @@ public class Bruteforce extends Algorithm {
         }
         return factorial;
     }
-    
+
     private double calculateDistance(Location locA, Location locB) {
         double distA;
         double distB;
@@ -63,8 +85,8 @@ public class Bruteforce extends Algorithm {
     private double getTotalDistance(ArrayList<Location> route) {
         double totalDistance = 0;
 
-        for (int i = 0; i < route.size(); i++) {
-            totalDistance += calculateDistance(route.get(i), route.get(i+1));
+        for (int i = 0; i < route.size() - 1; i++) {
+            totalDistance += calculateDistance(route.get(i), route.get(i + 1));
         }
         this.distance = totalDistance;
         return distance;

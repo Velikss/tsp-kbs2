@@ -23,7 +23,7 @@ public class Simulator {
     public Simulator() {
         this.X = 5;
         this.Y = 5;
-        this.points = 24;
+        this.points = 4;
 
         this.generateLocations(this.X, this.Y, this.points);
         results.add(new Route(locations));
@@ -31,10 +31,10 @@ public class Simulator {
         results.add(new Route(locations));
         results.add(new Route(locations));
 
-        algorithms.add(new NearestNeighbour());
-        algorithms.add(new NearestNeighbour());
-        algorithms.add(new NearestNeighbour());
-        algorithms.add(new NearestNeighbour());
+        algorithms.add(new Bruteforce());
+        algorithms.add(new Bruteforce());
+        algorithms.add(new Bruteforce());
+        algorithms.add(new Bruteforce());
 
         Screen s = new Screen(this);
     }
