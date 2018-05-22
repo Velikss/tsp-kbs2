@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public abstract class Algorithm {
     
     protected long time;
+    protected double distance;
     protected String name;
     protected ArrayList<Location> locations = new ArrayList<>();
     protected Route result;

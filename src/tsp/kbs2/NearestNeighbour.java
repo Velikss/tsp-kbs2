@@ -21,13 +21,13 @@ public class NearestNeighbour extends Algorithm {
         int size = locations.size();
         //Start timer        
         time = System.nanoTime();
-        
+
         //Algorithm        
         ArrayList<Location> route = new ArrayList<>();
         //Add start location
-        Location startLocation = new Location (0, 0);
+        Location startLocation = new Location(0, 0);
         route.add(startLocation);
-        
+
         for (int i = 0; i < size; i++) {
             Location nearest = findNearest(locations, route.get(i));
             route.add(nearest);
@@ -35,12 +35,12 @@ public class NearestNeighbour extends Algorithm {
         }
         //Add end location        
         route.add(new Location(0, 0));
-        
+
         //End timer        
         time = (System.nanoTime() - time) / 1000000;
-        System.out.println("Nearest Neighbour route: " + route + "Size: " + (route.size()-2));
+        System.out.println("Nearest Neighbour route: " + route + "Size: " + (route.size() - 2));
 //        System.out.println("Tijd:" + time);
-        
+
         this.result = new Route(route);
         return result;
     }
@@ -59,6 +59,16 @@ public class NearestNeighbour extends Algorithm {
             distB = locB.getPositionY() - locA.getPositionY();
         }
         return Math.sqrt(Math.pow(distA, 2) + Math.pow(distB, 2));
+    }
+
+    private double getTotalDistance(ArrayList<Location> route) {
+        double totalDistance = 0;
+
+        for (int i = 0; i < route.size(); i++) {
+            totalDistance += calculateDistance(route.get(i), route.get(i+1));
+        }
+        this.distance = totalDistance;
+        return distance;
     }
 
     public Location findNearest(ArrayList<Location> neighbours, Location a) {
