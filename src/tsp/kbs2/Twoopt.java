@@ -38,6 +38,19 @@ public class Twoopt extends Algorithm {
         return result;
     }
 
+    public boolean intersect(Location locA, Location locB, Location locC, Location locD) {
+        // determinant = ((x2-x1)/(y2-y1) - (x4-x3)/(y4-y3)) 
+        double d = ((locB.getPositionX() - locA.getPositionX())
+                / (locB.getPositionY() - locA.getPositionY())
+                - (locD.getPositionX() - locC.getPositionX())
+                / (locD.getPositionY() - locC.getPositionY()));
+        if (d != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean twoOpt() {
         boolean improved = false;
         int size = currentRoute.size();
@@ -57,7 +70,7 @@ public class Twoopt extends Algorithm {
                 }
             }
         }
-        
+
         if (improved) {
             System.out.println("current route: " + currentRoute);
             return true;
@@ -76,8 +89,7 @@ public class Twoopt extends Algorithm {
         currentRoute.get(j).setPositionY(iy);
         System.out.println(currentRoute);
     }
-    
-    
+
     private double calculateDistance(Location locA, Location locB) {
         double distA;
         double distB;
