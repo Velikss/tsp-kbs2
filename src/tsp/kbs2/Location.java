@@ -10,8 +10,8 @@ package tsp.kbs2;
  * @author Felix
  */
 public class Location {
-    public int xPosition;
-    public int yPosition;
+    private int xPosition;
+    private int yPosition;
     
     public Location(int x, int y) {
         this.xPosition = x;

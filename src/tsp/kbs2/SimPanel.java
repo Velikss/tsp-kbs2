@@ -56,19 +56,19 @@ public class SimPanel extends JPanel {
             ArrayList<Location> route = result.getRoute();
             //Fill rectangle at location a
             for (Location a : route) {
-                int X = ((a.xPosition * dimensionX) - dimensionX) + 1;
-                int Y = (lengthY - (a.yPosition * dimensionY)) + 1;
+                int X = ((a.getPositionX() * dimensionX) - dimensionX) + 1;
+                int Y = (lengthY - (a.getPositionY() * dimensionY)) + 1;
                 g.setColor(Color.red);
                 g.fillRect(X, Y, dimensionX, dimensionY);
             }
 
             //Draws lines
             for (int i = 1; i < route.size(); i++) {
-                int X1 = (route.get(i - 1).xPosition * dimensionX) - (dimensionX / 2);
-                int Y1 = (lengthY - (route.get(i - 1).yPosition * dimensionY)) + (dimensionY / 2);
+                int X1 = (route.get(i - 1).getPositionX() * dimensionX) - (dimensionX / 2);
+                int Y1 = (lengthY - (route.get(i - 1).getPositionY() * dimensionY)) + (dimensionY / 2);
 
-                int X2 = (route.get(i).xPosition * dimensionX) - (dimensionX / 2);
-                int Y2 = (lengthY - (route.get(i).yPosition * dimensionY)) + (dimensionY / 2);
+                int X2 = (route.get(i).getPositionX() * dimensionX) - (dimensionX / 2);
+                int Y2 = (lengthY - (route.get(i).getPositionY() * dimensionY)) + (dimensionY / 2);
 
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND));
