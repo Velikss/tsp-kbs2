@@ -4,7 +4,11 @@
  */
 package tsp.kbs2;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,15 +30,15 @@ public class Simulator {
         this.points = 4;
 
         this.generateLocations(this.X, this.Y, this.points);
-        results.add(new Route(locations));
-        results.add(new Route(locations));
-        results.add(new Route(locations));
-        results.add(new Route(locations));
+        results.add(new Route(locations, "test", 0));
+        results.add(new Route(locations, "test", 0));
+        results.add(new Route(locations, "test", 0));
+        results.add(new Route(locations, "test", 0));
 
-        algorithms.add(new Bruteforce());
-        algorithms.add(new Bruteforce());
-        algorithms.add(new Bruteforce());
-        algorithms.add(new Bruteforce());
+        algorithms.add(new NearestNeighbour());
+        algorithms.add(new NearestNeighbour());
+        algorithms.add(new NearestNeighbour());
+        algorithms.add(new NearestNeighbour());
 
         Screen s = new Screen(this);
     }
@@ -47,13 +51,13 @@ public class Simulator {
             int randomX = (int) (Math.random() * (X - 1) + 1.5);
             int randomY = (int) (Math.random() * (Y - 1) + 1.5);
             Location newRandom = new Location(randomX, randomY);
-            
+
             for (Location a : locations) {
-                if(newRandom.equals(a)) {
+                if (newRandom.equals(a)) {
                     alreadyExists = true;
-                } 
+                }
             }
-            
+
             if (alreadyExists) {
                 i--;
             } else {
@@ -70,6 +74,31 @@ public class Simulator {
             results.add(a.solve(locations));
         }
         this.results = results;
+    }
+
+    public void generateResults() {
+        String fileName = "Results-"
+                + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss")
+                        .format(new Date());
+        try {
+            PrintWriter writer = new PrintWriter(
+                    "C:\\Users\\Felix\\Documents\\NetBeansProjects"
+                    + "\\tsp-kbs2\\Results\\"
+                    + fileName + ".json");
+            writer.println("[");
+            for (Route r : results) {
+                writer.println("    {");
+                writer.println("       \"name\": " + r.getName() + ",");
+                writer.println("       \"route\": " + r.getRoute() + ",");
+                writer.println("       \"time\": " + r.getTime() + ",");
+                writer.println("       \"distance\": " + r.getDistance() + ",");
+                writer.println("    },");
+            }
+            writer.println("]");
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Error -> File could not be created " + ex.getMessage());
+        }
     }
 
     public Route getRoute(int a) {
