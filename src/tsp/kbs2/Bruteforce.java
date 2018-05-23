@@ -4,6 +4,7 @@
  */
 package tsp.kbs2;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,11 +13,14 @@ import java.util.Collections;
  * @author Felix
  */
 public class Bruteforce extends Algorithm {
-
-    private ArrayList<Location> newBestRoute = new ArrayList<Location>();
+    private ArrayList<Location> allLocs;
+    private ArrayList<Location> bestRoute;
+    private int total =0;
 
     public Bruteforce() {
         super.setName("Bruteforce algorithm");
+        allLocs = new ArrayList<>();
+        bestRoute = new ArrayList<>();
     }
 
     @Override
@@ -27,37 +31,49 @@ public class Bruteforce extends Algorithm {
         int options = calculateOptions(locations.size());
 
         //Algorithm
-        loop(locations, locations.size());
-        this.result = new Route(newBestRoute, this.getName(), this.time);
+        this.result = new Route(loop(locations), this.getName(), this.time);
         return result;
     }
 
-    public void loop(ArrayList<Location> locations, int a) {
-        double distance = 999999999;
-        if (a == 1) {
-            return;
+    private ArrayList<Location> loop(ArrayList<Location> locations) {
+        allLocs = locations;
+        for(int i=0; i<locations.size(); i++){
+            ArrayList<Location> route = new ArrayList<>();
+            route.add(new Location(0,0));
+            checkRoute(route, i);
         }
-        for (int i = 0; i < a; i++) {
-            Collections.swap(locations, i, a - 1);
-            
-            if(getTotalDistance(locations) < distance) {
-                newBestRoute = locations;
-                distance = getTotalDistance(locations);
-            }
-            
-            loop(locations, a - 1);
-            
-            Collections.swap(locations, i, a - 1);
-            
-            if(getTotalDistance(locations) < distance) {
-                newBestRoute = locations;
-                distance = getTotalDistance(locations);
-            }
-        }
-        this.distance = distance;
+
+        System.out.println(calculateOptions(allLocs.size()));
+        System.out.println(total);
+        return bestRoute;
     }
 
-    public int calculateOptions(int points) {
+    private void checkRoute(ArrayList<Location> route, int offset){
+        ArrayList<Location> thisRoute = (ArrayList<Location>) route.clone();
+        thisRoute.add(allLocs.get(offset));
+        if(thisRoute.size() == allLocs.size()+1){
+            total++;
+            thisRoute.add(new Location(0,0));
+            System.out.println(thisRoute);
+            if(bestRoute.size() != 0){
+                if(getTotalDistance(bestRoute) > getTotalDistance(thisRoute)){
+                    bestRoute = (ArrayList<Location>) thisRoute.clone();
+                    return;
+                }
+            }else{
+                bestRoute = (ArrayList<Location>) thisRoute.clone();
+                return;
+            }
+        }
+
+        for(int i=0; i<allLocs.size(); i++){
+            if(!thisRoute.contains(allLocs.get(i))){
+                checkRoute(thisRoute, i);
+            }
+        }
+    }
+
+    private int calculateOptions(int points) {
         int factorial = 1;
 
         for (int i = 1; i <= points; i++) {
