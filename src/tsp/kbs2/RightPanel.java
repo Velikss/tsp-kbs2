@@ -150,10 +150,10 @@ public class RightPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startSimulation) {
             ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
-            algorithms.add(new TwooptAdvanced());
-            algorithms.add(new TwooptAdvanced());
-            algorithms.add(new TwooptAdvanced());
-            algorithms.add(new TwooptAdvanced());
+            algorithms.add(new Bruteforce());
+            algorithms.add(new Bruteforce());
+            algorithms.add(new Bruteforce());
+            algorithms.add(new Bruteforce());
             simulator.simStart(algorithms);
             left.refresh(simulator);
 
