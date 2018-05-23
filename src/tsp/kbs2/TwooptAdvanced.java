@@ -10,11 +10,11 @@ import java.util.ArrayList;
  *
  * @author Felix
  */
-public class Twoopt extends Algorithm {
+public class TwooptAdvanced extends Algorithm {
 
     private ArrayList<Location> currentRoute = new ArrayList<Location>();
 
-    public Twoopt() {
+    public TwooptAdvanced() {
         super.setName("Two-opt Algorithm");
     }
 
@@ -76,8 +76,7 @@ public class Twoopt extends Algorithm {
         currentRoute.get(j).setPositionY(iy);
         System.out.println(currentRoute);
     }
-    
-    
+
     private double calculateDistance(Location locA, Location locB) {
         double distA;
         double distB;

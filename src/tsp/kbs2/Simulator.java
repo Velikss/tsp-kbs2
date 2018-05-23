@@ -35,10 +35,10 @@ public class Simulator {
         results.add(new Route(locations, "test", 0));
         results.add(new Route(locations, "test", 0));
 
-        algorithms.add(new NearestNeighbour());
-        algorithms.add(new NearestNeighbour());
-        algorithms.add(new NearestNeighbour());
-        algorithms.add(new NearestNeighbour());
+        algorithms.add(new TwooptAdvanced());
+        algorithms.add(new TwooptAdvanced());
+        algorithms.add(new TwooptAdvanced());
+        algorithms.add(new TwooptAdvanced());
 
         Screen s = new Screen(this);
     }
