@@ -18,13 +18,12 @@ import javax.swing.event.ChangeListener;
  *
  * @author Felix
  */
-
 public class RightPanel extends JPanel implements ActionListener {
 
     private JPanel settings;
     private JTextArea infoBox;
     private JScrollPane scroll;
-    private JButton startSimulation;
+    private JButton startSimulation, generateResults;
     private JSpinner simcount, pointcount, height, width;
     private JCheckBox bruteforcecheck, twooptcheck, nearestneighbourcheck, weightedtwooptcheck;
     private Simulator simulator;
@@ -67,7 +66,7 @@ public class RightPanel extends JPanel implements ActionListener {
 
 //      Grid settings
         settings.add(new JLabel("Simulatie settings"));
-        
+
         settings.add(new JLabel("Aantal punten"));
         SpinnerModel pcm = new SpinnerNumberModel(simulator.getPoints(), 2, 9025, 1);
         pointcount = new JSpinner(pcm);
@@ -76,7 +75,7 @@ public class RightPanel extends JPanel implements ActionListener {
             public void stateChanged(ChangeEvent e) {
                 int value = (Integer) pointcount.getValue();
                 //Check if points fit in grid, if not set back to previous value
-                if(value > (simulator.getX() * simulator.getY())) {
+                if (value > (simulator.getX() * simulator.getY())) {
                     infoBox.append(value + " points don't fit in the grid!\n");
                     value = simulator.getPoints();
                 }
@@ -126,10 +125,14 @@ public class RightPanel extends JPanel implements ActionListener {
             }
         });
         settings.add(width);
-        
+
         startSimulation = new JButton("Start simulatie");
         settings.add(startSimulation);
         startSimulation.addActionListener(this);
+
+        generateResults = new JButton("Genereer resultaten");
+        settings.add(generateResults);
+        generateResults.addActionListener(this);
 
         add(settings, BorderLayout.PAGE_START);
 
@@ -145,18 +148,22 @@ public class RightPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == startSimulation) {
+        if (e.getSource() == startSimulation) {
             ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
-            algorithms.add(new Bruteforce());
-            algorithms.add(new Bruteforce());
-            algorithms.add(new Bruteforce());
-            algorithms.add(new Bruteforce());
+            algorithms.add(new NearestNeighbour());
+            algorithms.add(new NearestNeighbour());
+            algorithms.add(new NearestNeighbour());
+            algorithms.add(new NearestNeighbour());
             simulator.simStart(algorithms);
             left.refresh(simulator);
-            
+
             for (Algorithm a : algorithms) {
-                
+
             }
+        }
+
+        if (e.getSource() == generateResults) {
+            simulator.generateResults();
         }
     }
 }

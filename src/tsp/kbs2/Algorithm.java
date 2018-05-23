@@ -15,7 +15,7 @@ public abstract class Algorithm {
     
     protected long time;
     protected double distance;
-    protected String name;
+    private String name;
     protected ArrayList<Location> locations = new ArrayList<>();
     protected Route result;
 
@@ -26,6 +26,12 @@ public abstract class Algorithm {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
+    
+    
     
     
 }

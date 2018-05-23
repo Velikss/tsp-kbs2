@@ -27,6 +27,16 @@ public class Location {
         return yPosition;
     }
 
+    public void setPositionX(int xPosition) {
+        this.xPosition = xPosition;
+    }
+
+    public void setPositionY(int yPosition) {
+        this.yPosition = yPosition;
+    }
+    
+    
+
 
     @Override
     public boolean equals(Object obj) {
@@ -54,6 +64,6 @@ public class Location {
     
     @Override
     public String toString() {
-        return xPosition + ":" + yPosition;
+        return "\"" +xPosition + ":" + yPosition + "\"";
     }
 }

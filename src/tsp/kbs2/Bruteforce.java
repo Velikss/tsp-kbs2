@@ -28,7 +28,7 @@ public class Bruteforce extends Algorithm {
 
         //Algorithm
         loop(locations, locations.size());
-        this.result = new Route(newBestRoute);
+        this.result = new Route(newBestRoute, this.getName(), this.time);
         return result;
     }
 

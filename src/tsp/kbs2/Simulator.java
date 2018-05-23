@@ -86,13 +86,17 @@ public class Simulator {
                     + "\\tsp-kbs2\\Results\\"
                     + fileName + ".json");
             writer.println("[");
-            for (Route r : results) {
+            int size = results.size();
+            for (int i = 0; i < size; i++) {
+                System.out.println("size: " + size + " I: " + i);
+                Route r = results.get(i);
                 writer.println("    {");
-                writer.println("       \"name\": " + r.getName() + ",");
+                writer.println("       \"name\": \"" + r.getName() + "\",");
                 writer.println("       \"route\": " + r.getRoute() + ",");
-                writer.println("       \"time\": " + r.getTime() + ",");
-                writer.println("       \"distance\": " + r.getDistance() + ",");
-                writer.println("    },");
+                writer.println("       \"time\": \"" + r.getTime() + "\",");
+                writer.println("       \"distance\": \"" + r.getDistance() + "\"");
+                if (i < size-1 ) writer.println("    },");
+                if (i == size-1 ) writer.println("    }");
             }
             writer.println("]");
             writer.close();
