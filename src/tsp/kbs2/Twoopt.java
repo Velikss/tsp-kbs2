@@ -4,6 +4,7 @@
  */
 package tsp.kbs2;
 
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 /**
@@ -21,58 +22,67 @@ public class Twoopt extends Algorithm {
     @Override
     public Route solve(ArrayList<Location> locations) {
         time = System.nanoTime();
-        System.out.println("time: " + time);
+        
         currentRoute.addAll(locations);
         currentRoute.add(0, new Location(0, 0));
         currentRoute.add(new Location(0, 0));
+        int a = 0;
+        for (int i = 1; i < currentRoute.size(); i++) {
+            Location locA = currentRoute.get(i - 1);
+            Location locB = currentRoute.get(i);
+            System.out.println("Line: " + locA + "  -  " + locB);
+            System.out.println("I = " + i);
+            System.out.println("size = " + currentRoute.size());
+            //Checks all lines that come after line AB
+            if (i <= currentRoute.size() - 1) {
+                for (int j = i + 2; j < currentRoute.size(); j++) {
+                    Location locC = currentRoute.get(j - 1);
+                    Location locD = currentRoute.get(j);
+                    System.out.println("[AFTER] Checking: " + locA + " - " + locB + "  with  " + locC + " - " + locD);
+                    if (intersect(locA, locB, locC, locD)) {
+                        swap(i, j-1);
+                        i = 1;
+                    }
+                    a++;
+                }
+            } 
+            //Checks all lines that come before line AB
+            if (currentRoute.size() - i >= 2) {
+                for (int j = 1; j < i-1; j++) {
+                    Location locC = currentRoute.get(j - 1);
+                    Location locD = currentRoute.get(j);
+                    System.out.println("[BEFORE] Checking: " + locA + " - " + locB + "  with  " + locC + " - " + locD);
+                    if (intersect(locA, locB, locC, locD)) {
+                        swap(i-1, j);
+                        i = 1;
+                    }
+                    a++;
+                }
 
-        if (!(currentRoute.size() == 2)) {
-            while (twoOpt()) {
+            }
+            if(a > 50000) {
+                    System.out.println("LOOP ONDERBROKEN-------");
+                break;
             }
         }
-
-        System.out.println("TSP -> 2-Opt result:");
+        
+        time = System.nanoTime() - time;
         System.out.println(currentRoute);
-
-        this.result = new Route(currentRoute, this.getName(), this.time);
+        this.result = new Route(currentRoute, this.getName(), time);
         return result;
     }
 
     public boolean intersect(Location locA, Location locB, Location locC, Location locD) {
-        // determinant = ((x2-x1)/(y2-y1) - (x4-x3)/(y4-y3)) 
-        double d = ((locB.getPositionX() - locA.getPositionX())
-                / (locB.getPositionY() - locA.getPositionY())
-                - (locD.getPositionX() - locC.getPositionX())
-                / (locD.getPositionY() - locC.getPositionY()));
-        if (d != 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean twoOpt() {
-        boolean improved = false;
-        int size = currentRoute.size();
-
-        for (int i = 1; i < size - 1; i++) {
-            for (int j = 1; j < size - 1; j++) {
-                if (i == j) {
-                    continue;
-                }
-                double d = getTotalDistance(currentRoute);
-                swap(i, j);
-                double d2 = getTotalDistance(currentRoute);
-                if (d <= d2) {
-                    swap(i, j);
-                } else {
-                    improved = true;
-                }
-            }
-        }
-
-        if (improved) {
-            System.out.println("current route: " + currentRoute);
+        int x1 = locA.getPositionX();
+        int y1 = locA.getPositionY();
+        int x2 = locB.getPositionX();
+        int y2 = locB.getPositionY();
+        int x3 = locC.getPositionX();
+        int y3 = locC.getPositionY();
+        int x4 = locD.getPositionX();
+        int y4 = locD.getPositionY();
+        
+        if (Line2D.linesIntersect(x1, y1, x2, y2, x3, y3, x4, y4)) {
             return true;
         } else {
             return false;
@@ -80,7 +90,13 @@ public class Twoopt extends Algorithm {
     }
 
     private void swap(int i, int j) {
-        System.out.println("Swapping...");
+        Location zero = new Location(0,0);
+        if (currentRoute.get(i).equals(zero)) {
+            i -= 1;
+        }
+        if (currentRoute.get(j).equals(zero)) {
+            j -= 1;
+        }
         int ix = currentRoute.get(i).getPositionX();
         int iy = currentRoute.get(i).getPositionY();
         currentRoute.get(i).setPositionX(currentRoute.get(j).getPositionX());

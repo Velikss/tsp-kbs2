@@ -25,9 +25,9 @@ public class Simulator {
     private int points;
 
     public Simulator() {
-        this.X = 5;
-        this.Y = 5;
-        this.points = 4;
+        this.X = 30;
+        this.Y = 30;
+        this.points = 21;
 
         this.generateLocations(this.X, this.Y, this.points);
         results.add(new Route(locations, "test", 0));
@@ -45,7 +45,7 @@ public class Simulator {
 
     public void generateLocations(int X, int Y, int amount) {
         this.locations.clear();
-
+        System.out.println("Generating locations... " + locations);
         for (int i = 1; i <= amount; i++) {
             boolean alreadyExists = false;
             int randomX = (int) (Math.random() * (X - 1) + 1.5);
@@ -64,7 +64,7 @@ public class Simulator {
                 locations.add(newRandom);
             }
         }
-        System.out.println(locations + " : " + locations.size());
+        System.out.println("Generated: " + locations);
     }
 
     public void simStart(ArrayList<Algorithm> algorithms) {

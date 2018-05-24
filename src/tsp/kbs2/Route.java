@@ -21,7 +21,6 @@ public class Route {
         this.name = name;
         this.route = route;
         this.time = time;
-        System.out.println("routee: " + route);
         getTotalDistance(route);
     }
 
