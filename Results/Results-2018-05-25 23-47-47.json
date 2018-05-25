@@ -1,0 +1,26 @@
+{
+    "Iteration 1" : [{
+       "name": "Nearest Neighbour Algorithm",
+       "route": ["0:0", "4:8", "6:9", "4:8", "6:9", "4:8", "0:0"],
+       "time": "53861",
+       "distance": "27.880656852401334"
+        }],
+    "Iteration 2" : [{
+       "name": "Nearest Neighbour Algorithm",
+       "route": ["0:0", "4:8", "6:9", "4:8", "6:9", "4:8", "0:0"],
+       "time": "30457",
+       "distance": "18.939071321264432"
+        }],
+    "Iteration 3" : [{
+       "name": "Nearest Neighbour Algorithm",
+       "route": ["0:0", "4:8", "6:9", "4:8", "6:9", "4:8", "0:0"],
+       "time": "27571",
+       "distance": "33.41640786499874"
+        }],
+    "Iteration 4" : [{
+       "name": "Nearest Neighbour Algorithm",
+       "route": ["0:0", "4:8", "6:9", "4:8", "6:9", "4:8", "0:0"],
+       "time": "27251",
+       "distance": "26.832815729997478"
+        }]
+}

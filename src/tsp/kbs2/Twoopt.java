@@ -22,6 +22,7 @@ public class Twoopt extends Algorithm {
 
     @Override
     public Route solve(ArrayList<Location> locations) {
+        //Start timer
         time = System.nanoTime();
 
         currentRoute = (ArrayList<Location>) locations.clone();
@@ -30,6 +31,7 @@ public class Twoopt extends Algorithm {
 
         Twoopt();
 
+        //End timer
         time = System.nanoTime() - time;
 
         this.result = new Route(currentRoute, this.getName(), time);

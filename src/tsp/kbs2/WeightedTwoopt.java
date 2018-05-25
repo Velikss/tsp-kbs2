@@ -16,6 +16,7 @@ public class WeightedTwoopt extends Algorithm {
 
     @Override
     public Route solve(ArrayList<Location> locations) {
+        //Start timer
         time = System.nanoTime();
 
         currentRoute = (ArrayList<Location>) locations.clone();
@@ -31,7 +32,8 @@ public class WeightedTwoopt extends Algorithm {
         currentRoute.add(new Location(0, 0));
 
         Twoopt();
-
+        
+        //End timer
         time = System.nanoTime() - time;
 
         this.result = new Route(currentRoute, this.getName(), time);

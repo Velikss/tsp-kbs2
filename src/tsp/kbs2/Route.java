@@ -5,22 +5,24 @@
 package tsp.kbs2;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
  * @author Felix
  */
 public class Route {
-    
+
     private ArrayList<Location> route;
     private double distance;
-    private long time;
+    private double time;
     private String name;
-    
-    public Route(ArrayList<Location> route, String name, long time) {
+
+    public Route(ArrayList<Location> route, String name, double time) {
         this.name = name;
         this.route = route;
-        this.time = time;
+        this.time = time / 1E6;
+//        this.time = TimeUnit.MILLISECONDS.convert((long) time, TimeUnit.NANOSECONDS);
         getTotalDistance(route);
     }
 
@@ -43,12 +45,12 @@ public class Route {
     private void getTotalDistance(ArrayList<Location> route) {
         double totalDistance = 0;
 
-        for (int i = 0; i < route.size()-1; i++) {
-            totalDistance += calculateDistance(route.get(i), route.get(i+1));
+        for (int i = 0; i < route.size() - 1; i++) {
+            totalDistance += calculateDistance(route.get(i), route.get(i + 1));
         }
         this.distance = totalDistance;
     }
-    
+
     public ArrayList<Location> getRoute() {
         return route;
     }
@@ -61,11 +63,13 @@ public class Route {
         return distance;
     }
 
-    public long getTime() {
+    public double getTime() {
         return time;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Route{" + "route=" + route + ", name=" + name + '}';
+    }
+
 }

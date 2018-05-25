@@ -12,8 +12,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Felix/Documents/NetBeansProjects/tsp-kbs2/src/tsp/kbs2/Simulator.java</file>
+            <file>file:/C:/Users/Felix/Documents/NetBeansProjects/tsp-kbs2/src/tsp/kbs2/LeftPanel.java</file>
             <file>file:/C:/Users/Felix/Documents/NetBeansProjects/tsp-kbs2/src/tsp/kbs2/RightPanel.java</file>
-            <file>file:/C:/Users/Felix/Documents/NetBeansProjects/tsp-kbs2/src/tsp/kbs2/Twoopt.java</file>
+            <file>file:/C:/Users/Felix/Documents/NetBeansProjects/tsp-kbs2/src/tsp/kbs2/SimPanel.java</file>
+            <file>file:/C:/Users/Felix/Documents/NetBeansProjects/tsp-kbs2/src/tsp/kbs2/Route.java</file>
+            <file>file:/C:/Users/Felix/Documents/NetBeansProjects/tsp-kbs2/src/tsp/kbs2/TspKbs2.java</file>
+            <file>file:/C:/Users/Felix/Documents/NetBeansProjects/tsp-kbs2/src/tsp/kbs2/Simulation.java</file>
         </group>
     </open-files>
 </project-private>

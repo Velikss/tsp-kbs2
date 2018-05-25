@@ -30,8 +30,12 @@ public class Bruteforce extends Algorithm {
         int options = calculateOptions(locations.size());
 
         //Algorithm
-        this.result = new Route(loop(locations), this.getName(), time);
-        System.out.println("BRUTEFORCE" + result.getRoute());
+        bestRoute = loop(locations);
+        
+        //End timer
+        time = System.nanoTime();
+        
+        this.result = new Route(bestRoute, this.getName(), time);
         return result;
     }
 

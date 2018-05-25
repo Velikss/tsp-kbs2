@@ -19,27 +19,18 @@ public class Simulator {
 
     private ArrayList<Location> locations = new ArrayList<Location>();
     private ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
-    private ArrayList<Route> results = new ArrayList<Route>();
-    ArrayList<ArrayList<Route>> simulations = new ArrayList<>();
+    private ArrayList<Route> routes = new ArrayList<Route>();
+    ArrayList<ArrayList<Route>> simulations; // = new ArrayList<ArrayList<Route>>();
     private int X;
     private int Y;
     private int points;
+    private Screen s;
 
     public Simulator() {
         this.X = 15;
         this.Y = 15;
         this.points = 5;
 
-//        this.generateLocations(this.X, this.Y, this.points);
-//        results.add(new Route(locations, "test", 0));
-//        results.add(new Route(locations, "test", 0));
-//        results.add(new Route(locations, "test", 0));
-//        results.add(new Route(locations, "test", 0));
-//
-//        algorithms.add(new TwooptAdvanced());
-//        algorithms.add(new TwooptAdvanced());
-//        algorithms.add(new TwooptAdvanced());
-//        algorithms.add(new TwooptAdvanced());
         Screen s = new Screen(this);
     }
 
@@ -67,13 +58,19 @@ public class Simulator {
         System.out.println("Generated: " + locations);
     }
 
-    public void simStart() {
-        results.clear();
-        this.generateLocations(X, Y, points);
-        for (Algorithm a : algorithms) {
-            results.add(a.solve(locations));
+    public void simStart(int iterations) {
+        simulations = new ArrayList<ArrayList <Route>>();
+        for (int i = 0; i < iterations; i++) {
+            
+            this.generateLocations(X, Y, points);
+            routes.clear();
+            for (Algorithm a : algorithms) {
+                routes.add(a.solve(locations));
+            }
+
+            ArrayList<Route> results = (ArrayList<Route>) routes.clone();
+            simulations.add(results);
         }
-        simulations.add(results);
     }
 
     public void generateResults() {
@@ -86,11 +83,9 @@ public class Simulator {
                     + "\\tsp-kbs2\\Results\\"
                     + fileName + ".json");
             writer.println("{");
-            int sizeS = simulations.size();
-            System.out.println(simulations.get(0).get(0).getRoute());
-            System.out.println(simulations.get(1).get(0).getRoute());
-            for (int j = 0; j < sizeS; j++) {
-                writer.println("    \"Iteration " + j + "\" : [{");
+            int sizeSimulations = simulations.size();
+            for (int j = 0; j < sizeSimulations; j++) {
+                writer.println("    \"Iteration " + (j + 1) + "\" : [{");
                 int sizeR = simulations.get(j).size();
                 for (int i = 0; i < sizeR; i++) {
                     Route r = simulations.get(j).get(i);
@@ -98,12 +93,15 @@ public class Simulator {
                     writer.println("       \"route\": " + r.getRoute() + ",");
                     writer.println("       \"time\": \"" + r.getTime() + "\",");
                     writer.println("       \"distance\": \"" + r.getDistance() + "\"");
+                    if (i < sizeR - 1) {
+                        writer.println("        }, {");
+                    }
                 }
-                if (j < sizeS - 1) {
-                    writer.println("            }],");
+                if (j < sizeSimulations - 1) {
+                    writer.println("        }],");
                 }
-                if (j == sizeS - 1) {
-                    writer.println("            }]");
+                if (j == sizeSimulations - 1) {
+                    writer.println("        }]");
                 }
             }
             writer.println("}");
@@ -114,7 +112,7 @@ public class Simulator {
     }
 
     public Route getRoute(int a) {
-        return this.results.get(a);
+        return this.routes.get(a);
     }
 
     public void setPoints(int amount) {
@@ -130,7 +128,7 @@ public class Simulator {
     }
 
     public ArrayList<Route> getResults() {
-        return results;
+        return routes;
     }
 
     public int getX() {

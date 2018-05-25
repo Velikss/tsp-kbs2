@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public abstract class Algorithm {
     
-    protected long time;
+    protected double time;
     protected double distance;
     private String name;
     protected ArrayList<Location> locations = new ArrayList<>();

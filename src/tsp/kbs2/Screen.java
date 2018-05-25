@@ -20,7 +20,7 @@ public class Screen extends JFrame {
 
     public Simulator simulator;
     private LeftPanel left;
-    private RightPanel right;
+    RightPanel right;
 
     public Screen(Simulator sim) {
         this.simulator = sim;

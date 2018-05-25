@@ -139,11 +139,11 @@ public class RightPanel extends JPanel implements ActionListener {
         });
         settings.add(width);
 
-        startSimulation = new JButton("Start simulatie");
+        startSimulation = new JButton("Start simulator");
         settings.add(startSimulation);
         startSimulation.addActionListener(this);
 
-        generateResults = new JButton("Genereer resultaten");
+        generateResults = new JButton("Export to JSON");
         settings.add(generateResults);
         generateResults.addActionListener(this);
 
@@ -180,11 +180,11 @@ public class RightPanel extends JPanel implements ActionListener {
             if (algorithms.size() != 0) {
                 simulator.newAlgorithms(algorithms);
 
-                for (int i = 1; i <= simulations; i++) {
-                    System.out.println(i + " / " + simulations);
-                    simulator.simStart();
-                    System.out.println(simulator.getResults().size());
-                }
+//                for (int i = 1; i <= simulations; i++) {
+//                    System.out.println(i + " / " + simulations);
+                    simulator.simStart(simulations);
+//                    System.out.println(simulator.getResults().size());
+//                }
                 left.refresh(simulator);
             } else {
                 infoBox.append("No algorithms selected!\n");
@@ -192,6 +192,7 @@ public class RightPanel extends JPanel implements ActionListener {
         }
 
         if (e.getSource() == generateResults) {
+            infoBox.append("Exporting results...");
             simulator.generateResults();
             infoBox.append("Generated results!\n");
         }
