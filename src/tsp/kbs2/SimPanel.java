@@ -57,8 +57,8 @@ public class SimPanel extends JPanel {
 //Draws route
         if (simulator.getAlgorithms().size() > number) {
             this.result = simulator.getRoute(number);
+            System.out.println(result.getRoute());
             name.setText(simulator.getAlgorithms().get(number).getName());
-//            System.out.println(simulator.getAlgorithms().get(number).getName() + result.getRoute());
             if (result.getRoute().size() != 0) {
                 ArrayList<Location> route = result.getRoute();
                 //Fill rectangle at location a

@@ -18,10 +18,9 @@ public abstract class Algorithm {
     private String name;
     protected ArrayList<Location> locations = new ArrayList<>();
     protected Route result;
+    protected boolean infinit = false;
 
-    public Route solve(ArrayList<Location> locations) {
-        return result;
-    }
+    public abstract Route solve(ArrayList<Location> locations);
 
     public void setName(String name) {
         this.name = name;
@@ -31,7 +30,8 @@ public abstract class Algorithm {
         return name;
     }
     
-    
-    
-    
+    public void setInifinit(boolean b) {
+        this.infinit = b;
+    }
+       
 }

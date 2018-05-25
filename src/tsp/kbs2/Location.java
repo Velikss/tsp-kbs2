@@ -9,15 +9,23 @@ package tsp.kbs2;
  *
  * @author Felix
  */
-public class Location {
+public class Location implements Comparable<Location> {
     private int xPosition;
     private int yPosition;
+    private double weight;
     
     public Location(int x, int y) {
         this.xPosition = x;
         this.yPosition = y;
     }
-
+    
+    public double getWeight() {
+        return weight;
+    }
+    
+    public void setWeight(double weight){
+        this.weight = weight;
+    }
     
     public int getPositionX() {
         return xPosition;
@@ -61,6 +69,11 @@ public class Location {
         }
         return true;
     }  
+    
+    @Override
+    public int compareTo(Location o) {
+        return Double.compare(this.weight, o.getWeight());
+    }
     
     @Override
     public String toString() {

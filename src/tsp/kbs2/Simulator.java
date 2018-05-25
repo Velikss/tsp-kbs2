@@ -20,6 +20,7 @@ public class Simulator {
     private ArrayList<Location> locations = new ArrayList<Location>();
     private ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
     private ArrayList<Route> results = new ArrayList<Route>();
+    ArrayList<ArrayList<Route>> simulations = new ArrayList<>();
     private int X;
     private int Y;
     private int points;
@@ -72,12 +73,10 @@ public class Simulator {
         this.generateLocations(X, Y, points);
         for (Algorithm a : algorithms) {
             results.add(a.solve(locations));
-            for (Route r : results) {
-                System.out.println(a.getName() + " == " + r.getRoute());
-            }
         }
+        simulations.add(results);
     }
-
+    
     public void generateResults() {
         String fileName = "Results-"
                 + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss")

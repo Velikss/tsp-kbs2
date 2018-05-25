@@ -22,7 +22,9 @@ public class NearestNeighbour extends Algorithm {
     @Override
     public Route solve(ArrayList<Location> locations) {
         int size = locations.size();
-        pickList.addAll(locations);
+        currentRoute.clear();
+        pickList = (ArrayList<Location>) locations.clone();
+       
         //Start timer        
         time = System.nanoTime();
         
