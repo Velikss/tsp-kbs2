@@ -32,6 +32,7 @@ public class Bruteforce extends Algorithm {
 
         //Algorithm
         this.result = new Route(loop(locations), this.getName(), this.time);
+        System.out.println("BRUTEFORCE" + result.getRoute());
         return result;
     }
 
@@ -43,8 +44,8 @@ public class Bruteforce extends Algorithm {
             checkRoute(route, i);
         }
 
-        System.out.println(calculateOptions(allLocs.size()));
-        System.out.println(total);
+//        System.out.println(calculateOptions(allLocs.size()));
+//        System.out.println(total);
         return bestRoute;
     }
 
@@ -54,7 +55,6 @@ public class Bruteforce extends Algorithm {
         if(thisRoute.size() == allLocs.size()+1){
             total++;
             thisRoute.add(new Location(0,0));
-            System.out.println(thisRoute);
             if(bestRoute.size() != 0){
                 if(getTotalDistance(bestRoute) > getTotalDistance(thisRoute)){
                     bestRoute = (ArrayList<Location>) thisRoute.clone();

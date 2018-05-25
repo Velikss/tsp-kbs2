@@ -16,7 +16,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  *
  * @author Felix
  */
-public class Screen extends JFrame implements ActionListener {
+public class Screen extends JFrame {
 
     public Simulator simulator;
     private LeftPanel left;
@@ -42,11 +42,6 @@ public class Screen extends JFrame implements ActionListener {
         add(right);
 
         setVisible(true);
-    }
-
-    //action preformed toevoegen zodat je wat kunt doen met de knoppen en texten
-    @Override
-    public void actionPerformed(ActionEvent e) {
     }
     
     public void screenRepaint() {

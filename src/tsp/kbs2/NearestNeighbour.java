@@ -11,6 +11,9 @@ import java.util.ArrayList;
  * @author Felix
  */
 public class NearestNeighbour extends Algorithm {
+    
+    private ArrayList<Location> currentRoute = new ArrayList<Location>();
+    private ArrayList<Location> pickList = new ArrayList<Location>();
 
     public NearestNeighbour() {
         super.setName("Nearest Neighbour Algorithm");
@@ -19,29 +22,28 @@ public class NearestNeighbour extends Algorithm {
     @Override
     public Route solve(ArrayList<Location> locations) {
         int size = locations.size();
+        pickList.addAll(locations);
         //Start timer        
         time = System.nanoTime();
-
-        //Algorithm        
-        ArrayList<Location> route = new ArrayList<>();
+        
         //Add start location
         Location startLocation = new Location(0, 0);
-        route.add(startLocation);
+        currentRoute.add(startLocation);
 
+        //Algorithm        
         for (int i = 0; i < size; i++) {
-            Location nearest = findNearest(locations, route.get(i));
-            route.add(nearest);
-            locations.remove(nearest);
+            Location nearest = findNearest(pickList, currentRoute.get(i));
+            currentRoute.add(nearest);
+            pickList.remove(nearest);
         }
+        
         //Add end location        
-        route.add(new Location(0, 0));
+        currentRoute.add(new Location(0, 0));
 
         //End timer        
-        time = (System.nanoTime() - time) / 1000000;
-        System.out.println("Nearest Neighbour route: " + route + "Size: " + (route.size() - 2));
-//        System.out.println("Tijd:" + time);
+        time = System.nanoTime() - time;
 
-        this.result = new Route(route, this.getName(), this.time);
+        this.result = new Route(currentRoute, this.getName(), time);
         return result;
     }
 

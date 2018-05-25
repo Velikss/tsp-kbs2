@@ -19,14 +19,17 @@ public class SimPanel extends JPanel {
     private Route result;
     private int X, Y;
     private Algorithm algorithm;
+    private int number;
+    private JLabel name;
 
     public SimPanel(Simulator sim, int algorithm) {
         this.simulator = sim;
-        this.result = sim.getRoute(algorithm);
         this.X = sim.getX();
         this.Y = sim.getY();
-        this.setPreferredSize(new Dimension(500, 390));
+        this.number = algorithm;
 
+        this.setPreferredSize(new Dimension(500, 390));
+        add(name = new JLabel());
     }
 
     @Override
@@ -52,29 +55,36 @@ public class SimPanel extends JPanel {
         }
 
 //Draws route
-        if (result.getRoute().size() != 0) {
-            ArrayList<Location> route = result.getRoute();
-            //Fill rectangle at location a
-            for (Location a : route) {
-                int X = ((a.getPositionX() * dimensionX) - dimensionX) + 1;
-                int Y = (lengthY - (a.getPositionY() * dimensionY)) + 1;
-                g.setColor(Color.red);
-                g.fillRect(X, Y, dimensionX, dimensionY);
+        if (simulator.getAlgorithms().size() > number) {
+            this.result = simulator.getRoute(number);
+            name.setText(simulator.getAlgorithms().get(number).getName());
+//            System.out.println(simulator.getAlgorithms().get(number).getName() + result.getRoute());
+            if (result.getRoute().size() != 0) {
+                ArrayList<Location> route = result.getRoute();
+                //Fill rectangle at location a
+                for (Location a : route) {
+                    int X = ((a.getPositionX() * dimensionX) - dimensionX) + 1;
+                    int Y = (lengthY - (a.getPositionY() * dimensionY)) + 1;
+                    g.setColor(Color.red);
+                    g.fillRect(X, Y, dimensionX, dimensionY);
+                }
+
+                //Draws lines
+                for (int i = 1; i < route.size(); i++) {
+                    int X1 = (route.get(i - 1).getPositionX() * dimensionX) - (dimensionX / 2);
+                    int Y1 = (lengthY - (route.get(i - 1).getPositionY() * dimensionY)) + (dimensionY / 2);
+
+                    int X2 = (route.get(i).getPositionX() * dimensionX) - (dimensionX / 2);
+                    int Y2 = (lengthY - (route.get(i).getPositionY() * dimensionY)) + (dimensionY / 2);
+
+                    Graphics2D g2 = (Graphics2D) g;
+                    g2.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND));
+                    g.setColor(Color.blue);
+                    g.drawLine(X1, Y1, X2, Y2);
+                }
             }
-
-            //Draws lines
-            for (int i = 1; i < route.size(); i++) {
-                int X1 = (route.get(i - 1).getPositionX() * dimensionX) - (dimensionX / 2);
-                int Y1 = (lengthY - (route.get(i - 1).getPositionY() * dimensionY)) + (dimensionY / 2);
-
-                int X2 = (route.get(i).getPositionX() * dimensionX) - (dimensionX / 2);
-                int Y2 = (lengthY - (route.get(i).getPositionY() * dimensionY)) + (dimensionY / 2);
-
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND));
-                g.setColor(Color.blue);
-                g.drawLine(X1, Y1, X2, Y2);
-            }
+        } else {
+            name.setText("No data");
         }
 
     }
@@ -98,6 +108,5 @@ public class SimPanel extends JPanel {
     public void setRoute(Route r) {
         this.result = r;
     }
-    
-    
+
 }

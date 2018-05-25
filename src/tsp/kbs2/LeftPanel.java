@@ -17,8 +17,7 @@ import java.util.ArrayList;
 public class LeftPanel extends JPanel implements ActionListener {
 
     public Simulator simulator;
-    private ArrayList<SimPanel> panels;
-    private SimPanel Weightedtwoopt, Twoopt, Bruteforce, NearestNeighbour, Simpanel0, Simpanel1, Simpanel2, Simpanel3;
+    private SimPanel Simpanel0, Simpanel1, Simpanel2, Simpanel3;
     private int X, Y;
 
     public LeftPanel(Simulator sim) {
@@ -31,20 +30,21 @@ public class LeftPanel extends JPanel implements ActionListener {
 
         
         //Initializing SimPanels
+        System.out.println(sim.getAlgorithms());
         Simpanel0 = new SimPanel(sim, 0);
-        Simpanel0.add(new JLabel(sim.getAlgorithms().get(0).getName()));
+//        Simpanel0.add(new JLabel(sim.getAlgorithms().get(0).getName()));
         add(Simpanel0);
         
         Simpanel1 = new SimPanel(sim, 1);
-        Simpanel1.add(new JLabel(sim.getAlgorithms().get(1).getName()));
+//        Simpanel1.add(new JLabel(sim.getAlgorithms().get(1).getName()));
         add(Simpanel1);
         
         Simpanel2 = new SimPanel(sim, 2);
-        Simpanel2.add(new JLabel(sim.getAlgorithms().get(2).getName()));
+//        Simpanel2.add(new JLabel(sim.getAlgorithms().get(2).getName()));
         add(Simpanel2);
         
         Simpanel3 = new SimPanel(sim, 3);
-        Simpanel3.add(new JLabel(sim.getAlgorithms().get(3).getName()));
+//        Simpanel3.add(new JLabel(sim.getAlgorithms().get(3).getName()));
         add(Simpanel3);
         
 //        Weightedtwoopt = new SimPanel(sim, 0);

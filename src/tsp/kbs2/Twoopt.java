@@ -23,23 +23,22 @@ public class Twoopt extends Algorithm {
     public Route solve(ArrayList<Location> locations) {
         time = System.nanoTime();
         
-        currentRoute.addAll(locations);
+        currentRoute = (ArrayList<Location>) locations.clone();
         currentRoute.add(0, new Location(0, 0));
         currentRoute.add(new Location(0, 0));
+        
         int a = 0;
         for (int i = 1; i < currentRoute.size(); i++) {
             Location locA = currentRoute.get(i - 1);
             Location locB = currentRoute.get(i);
-            System.out.println("Line: " + locA + "  -  " + locB);
-            System.out.println("I = " + i);
-            System.out.println("size = " + currentRoute.size());
+            
             //Checks all lines that come after line AB
             if (i <= currentRoute.size() - 1) {
                 for (int j = i + 2; j < currentRoute.size(); j++) {
                     Location locC = currentRoute.get(j - 1);
                     Location locD = currentRoute.get(j);
-                    System.out.println("[AFTER] Checking: " + locA + " - " + locB + "  with  " + locC + " - " + locD);
                     if (intersect(locA, locB, locC, locD)) {
+                        //Upon intersect swap two points and reset iteration
                         swap(i, j-1);
                         i = 1;
                     }
@@ -51,14 +50,13 @@ public class Twoopt extends Algorithm {
                 for (int j = 1; j < i-1; j++) {
                     Location locC = currentRoute.get(j - 1);
                     Location locD = currentRoute.get(j);
-                    System.out.println("[BEFORE] Checking: " + locA + " - " + locB + "  with  " + locC + " - " + locD);
                     if (intersect(locA, locB, locC, locD)) {
+                        //Upon intersect swap two points and reset iteration
                         swap(i-1, j);
                         i = 1;
                     }
                     a++;
                 }
-
             }
             if(a > 50000) {
                     System.out.println("LOOP ONDERBROKEN-------");
@@ -67,7 +65,7 @@ public class Twoopt extends Algorithm {
         }
         
         time = System.nanoTime() - time;
-        System.out.println(currentRoute);
+        
         this.result = new Route(currentRoute, this.getName(), time);
         return result;
     }
@@ -103,7 +101,6 @@ public class Twoopt extends Algorithm {
         currentRoute.get(i).setPositionY(currentRoute.get(j).getPositionY());
         currentRoute.get(j).setPositionX(ix);
         currentRoute.get(j).setPositionY(iy);
-        System.out.println(currentRoute);
     }
 
     private double calculateDistance(Location locA, Location locB) {

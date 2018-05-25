@@ -25,20 +25,20 @@ public class Simulator {
     private int points;
 
     public Simulator() {
-        this.X = 30;
-        this.Y = 30;
-        this.points = 21;
+        this.X = 15;
+        this.Y = 15;
+        this.points = 5;
 
-        this.generateLocations(this.X, this.Y, this.points);
-        results.add(new Route(locations, "test", 0));
-        results.add(new Route(locations, "test", 0));
-        results.add(new Route(locations, "test", 0));
-        results.add(new Route(locations, "test", 0));
-
-        algorithms.add(new TwooptAdvanced());
-        algorithms.add(new TwooptAdvanced());
-        algorithms.add(new TwooptAdvanced());
-        algorithms.add(new TwooptAdvanced());
+//        this.generateLocations(this.X, this.Y, this.points);
+//        results.add(new Route(locations, "test", 0));
+//        results.add(new Route(locations, "test", 0));
+//        results.add(new Route(locations, "test", 0));
+//        results.add(new Route(locations, "test", 0));
+//
+//        algorithms.add(new TwooptAdvanced());
+//        algorithms.add(new TwooptAdvanced());
+//        algorithms.add(new TwooptAdvanced());
+//        algorithms.add(new TwooptAdvanced());
 
         Screen s = new Screen(this);
     }
@@ -67,13 +67,15 @@ public class Simulator {
         System.out.println("Generated: " + locations);
     }
 
-    public void simStart(ArrayList<Algorithm> algorithms) {
-        ArrayList<Route> results = new ArrayList<Route>();
+    public void simStart() {
+        results.clear();
         this.generateLocations(X, Y, points);
         for (Algorithm a : algorithms) {
             results.add(a.solve(locations));
+            for (Route r : results) {
+                System.out.println(a.getName() + " == " + r.getRoute());
+            }
         }
-        this.results = results;
     }
 
     public void generateResults() {
@@ -88,7 +90,6 @@ public class Simulator {
             writer.println("[");
             int size = results.size();
             for (int i = 0; i < size; i++) {
-                System.out.println("size: " + size + " I: " + i);
                 Route r = results.get(i);
                 writer.println("    {");
                 writer.println("       \"name\": \"" + r.getName() + "\",");
@@ -139,6 +140,10 @@ public class Simulator {
 
     public ArrayList<Algorithm> getAlgorithms() {
         return algorithms;
+    }
+    
+    public void newAlgorithms(ArrayList<Algorithm> newAlgorithms) {
+        this.algorithms = newAlgorithms;
     }
 
 }
