@@ -1,0 +1,18 @@
+{
+    "Iteration0" : [
+    {
+       "name": "Nearest Neighbour Algorithm",
+       "route": ["0:0", "3:12", "1:14", "8:12", "9:9", "12:10", "0:0"],
+       "time": "45220",
+       "distance": "44.42290856302975"
+    }
+            ],
+    "Iteration1" : [
+    {
+       "name": "Nearest Neighbour Algorithm",
+       "route": ["0:0", "3:12", "1:14", "8:12", "9:9", "12:10", "0:0"],
+       "time": "45220",
+       "distance": "44.42290856302975"
+    }
+            ]
+}

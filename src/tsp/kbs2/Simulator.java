@@ -40,7 +40,6 @@ public class Simulator {
 //        algorithms.add(new TwooptAdvanced());
 //        algorithms.add(new TwooptAdvanced());
 //        algorithms.add(new TwooptAdvanced());
-
         Screen s = new Screen(this);
     }
 
@@ -76,7 +75,7 @@ public class Simulator {
         }
         simulations.add(results);
     }
-    
+
     public void generateResults() {
         String fileName = "Results-"
                 + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss")
@@ -86,19 +85,28 @@ public class Simulator {
                     "C:\\Users\\Felix\\Documents\\NetBeansProjects"
                     + "\\tsp-kbs2\\Results\\"
                     + fileName + ".json");
-            writer.println("[");
-            int size = results.size();
-            for (int i = 0; i < size; i++) {
-                Route r = results.get(i);
-                writer.println("    {");
-                writer.println("       \"name\": \"" + r.getName() + "\",");
-                writer.println("       \"route\": " + r.getRoute() + ",");
-                writer.println("       \"time\": \"" + r.getTime() + "\",");
-                writer.println("       \"distance\": \"" + r.getDistance() + "\"");
-                if (i < size-1 ) writer.println("    },");
-                if (i == size-1 ) writer.println("    }");
+            writer.println("{");
+            int sizeS = simulations.size();
+            System.out.println(simulations.get(0).get(0).getRoute());
+            System.out.println(simulations.get(1).get(0).getRoute());
+            for (int j = 0; j < sizeS; j++) {
+                writer.println("    \"Iteration " + j + "\" : [{");
+                int sizeR = simulations.get(j).size();
+                for (int i = 0; i < sizeR; i++) {
+                    Route r = simulations.get(j).get(i);
+                    writer.println("       \"name\": \"" + r.getName() + "\",");
+                    writer.println("       \"route\": " + r.getRoute() + ",");
+                    writer.println("       \"time\": \"" + r.getTime() + "\",");
+                    writer.println("       \"distance\": \"" + r.getDistance() + "\"");
+                }
+                if (j < sizeS - 1) {
+                    writer.println("            }],");
+                }
+                if (j == sizeS - 1) {
+                    writer.println("            }]");
+                }
             }
-            writer.println("]");
+            writer.println("}");
             writer.close();
         } catch (FileNotFoundException ex) {
             System.out.println("Error -> File could not be created " + ex.getMessage());
@@ -140,7 +148,7 @@ public class Simulator {
     public ArrayList<Algorithm> getAlgorithms() {
         return algorithms;
     }
-    
+
     public void newAlgorithms(ArrayList<Algorithm> newAlgorithms) {
         this.algorithms = newAlgorithms;
     }
