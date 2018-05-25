@@ -28,6 +28,7 @@ public class RightPanel extends JPanel implements ActionListener {
     private JCheckBox bruteforcecheck, twooptcheck, nearestneighbourcheck, weightedtwooptcheck;
     private Simulator simulator;
     private LeftPanel left;
+    private int simulations = 1;
 
     public RightPanel(Simulator sim, LeftPanel left) {
         this.simulator = sim;
@@ -45,24 +46,36 @@ public class RightPanel extends JPanel implements ActionListener {
 //      Simulatie settings
         settings.add(new JLabel("Simulatie settings"));
         settings.add(new JLabel("Aantal simulaties"));
-        simcount = new JSpinner();
+
+        SpinnerModel countModel = new SpinnerNumberModel(simulations, 1, 50, 1);
+        simcount = new JSpinner(countModel);
+        simcount.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                simulations = (int) simcount.getValue();
+            }
+        });
         settings.add(simcount);
 
         settings.add(new JLabel("Bruteforce"));
         bruteforcecheck = new JCheckBox();
         settings.add(bruteforcecheck);
+        bruteforcecheck.addActionListener(this);
 
         settings.add(new JLabel("2-opt"));
         twooptcheck = new JCheckBox();
         settings.add(twooptcheck);
+        twooptcheck.addActionListener(this);
 
         settings.add(new JLabel("Nearest Neighbour"));
         nearestneighbourcheck = new JCheckBox();
         settings.add(nearestneighbourcheck);
+        nearestneighbourcheck.addActionListener(this);
 
         settings.add(new JLabel("Weighted 2-opt"));
         weightedtwooptcheck = new JCheckBox();
         settings.add(weightedtwooptcheck);
+        weightedtwooptcheck.addActionListener(this);
 
 //      Grid settings
         settings.add(new JLabel("Simulatie settings"));
@@ -149,19 +162,45 @@ public class RightPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startSimulation) {
+            //First all selected algorithms get added to the list
             ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
-            algorithms.add(new Twoopt());
-            algorithms.add(new NearestNeighbour());
-            algorithms.add(new Bruteforce());
-//            algorithms.add(new Twoopt());
-            simulator.newAlgorithms(algorithms);
-            
-            simulator.simStart();
-            left.refresh(simulator);
+            if (weightedtwooptcheck.isSelected()) {
+                algorithms.add(new WeightedTwoopt());
+            }
+            if (nearestneighbourcheck.isSelected()) {
+                algorithms.add(new NearestNeighbour());
+            }
+            if (bruteforcecheck.isSelected()) {
+                algorithms.add(new Bruteforce());
+            }
+            if (twooptcheck.isSelected()) {
+                algorithms.add(new Twoopt());
+            }
+
+            if (algorithms.size() != 0) {
+                simulator.newAlgorithms(algorithms);
+
+                for (int i = 1; i <= simulations; i++) {
+                    System.out.println(i + " / " + simulations);
+                    simulator.simStart();
+                    System.out.println(simulator.getResults().size());
+                }
+                left.refresh(simulator);
+            } else {
+                infoBox.append("No algorithms selected!\n");
+            }
         }
 
         if (e.getSource() == generateResults) {
             simulator.generateResults();
+            infoBox.append("Generated results!\n");
+        }
+
+        if (e.getSource() == bruteforcecheck) {
+            if (simulator.getPoints() > 10) {
+                infoBox.append("You have selected too much points for the Bruteforce algorithm!");
+                bruteforcecheck.setSelected(false);
+            }
         }
     }
 }
