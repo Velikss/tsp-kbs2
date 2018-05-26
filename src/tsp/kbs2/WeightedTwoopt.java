@@ -10,7 +10,7 @@ public class WeightedTwoopt extends Algorithm {
     private ArrayList<Double> distances;
 
     public WeightedTwoopt() {
-        super.setName("WeightedTwoOpt");
+        super.setName("Weighted two opt algorithm");
         currentRoute = new ArrayList<>();
     }
 

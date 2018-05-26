@@ -67,26 +67,27 @@ public class RightPanel extends JPanel implements ActionListener {
             }
         });
         settings.add(simcount);
-
-        settings.add(new JLabel("Bruteforce"));
-        bruteforcecheck = new JCheckBox();
-        settings.add(bruteforcecheck);
-        bruteforcecheck.addActionListener(this);
-
-        settings.add(new JLabel("2-opt"));
-        twooptcheck = new JCheckBox();
-        settings.add(twooptcheck);
-        twooptcheck.addActionListener(this);
-
-        settings.add(new JLabel("Nearest Neighbour"));
-        nearestneighbourcheck = new JCheckBox();
-        settings.add(nearestneighbourcheck);
-        nearestneighbourcheck.addActionListener(this);
-
+        
+        //Algorithm checkboxes
         settings.add(new JLabel("Weighted 2-opt"));
         weightedtwooptcheck = new JCheckBox();
         settings.add(weightedtwooptcheck);
         weightedtwooptcheck.addActionListener(this);
+        
+        settings.add(new JLabel("Nearest Neighbour"));
+        nearestneighbourcheck = new JCheckBox();
+        settings.add(nearestneighbourcheck);
+        nearestneighbourcheck.addActionListener(this);
+        
+        settings.add(new JLabel("Bruteforce"));
+        bruteforcecheck = new JCheckBox();
+        settings.add(bruteforcecheck);
+        bruteforcecheck.addActionListener(this);
+        
+        settings.add(new JLabel("2-opt"));
+        twooptcheck = new JCheckBox();
+        settings.add(twooptcheck);
+        twooptcheck.addActionListener(this);
 
 //      Grid settings
         gridSettings = new JLabel("Grid settings");
@@ -204,6 +205,9 @@ public class RightPanel extends JPanel implements ActionListener {
                     simulator.simStart(simulations);
                     for (int j = 0; j < algorithms.size(); j++) {
                         printToInfoBox(simulator.getResults().get(j).toString());
+                        printToInfoBox("Time: " + simulator.getResults().get(j).getTime() + " ms");
+                        printToInfoBox("Distance: " + simulator.getResults().get(j).getDistance());
+                        printToInfoBox("-------------------------------------------");
                     }
                 }
                 left.refresh(simulator);

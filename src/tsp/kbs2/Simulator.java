@@ -94,7 +94,7 @@ public class Simulator {
                     Route r = simulations.get(j).get(i);
                     writer.println("       \"name\": \"" + r.getName() + "\",");
                     writer.println("       \"route\": " + r.getRoute() + ",");
-                    writer.println("       \"time\": \"" + r.getTime() + "\",");
+                    writer.println("       \"time (ms)\": \"" + r.getTime() + "\",");
                     writer.println("       \"distance\": \"" + r.getDistance() + "\"");
                     if (i < sizeR - 1) {
                         writer.println("        }, {");

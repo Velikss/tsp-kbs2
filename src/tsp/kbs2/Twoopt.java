@@ -44,19 +44,7 @@ public class Twoopt extends Algorithm {
             Location locA = currentRoute.get(i - 1);
             Location locB = currentRoute.get(i);
 
-            //Checks all lines that come after line AB
-            if (i <= currentRoute.size() - 1) {
-                for (int j = i + 2; j < currentRoute.size(); j++) {
-                    Location locC = currentRoute.get(j - 1);
-                    Location locD = currentRoute.get(j);
-                    if (intersect(locA, locB, locC, locD)) {
-                        //Upon intersect swap two points and reset iteration
-                        swap(i, j - 1);
-                        i = 1;
-                    }
-                    a++;
-                }
-            }
+            
             //Checks all lines that come before line AB
             if (currentRoute.size() - i >= 2) {
                 for (int j = 1; j < i - 1; j++) {
@@ -65,6 +53,20 @@ public class Twoopt extends Algorithm {
                     if (intersect(locA, locB, locC, locD)) {
                         //Upon intersect swap two points and reset iteration
                         swap(i - 1, j);
+                        i = 1;
+                    }
+                    a++;
+                }
+            }
+            
+            //Checks all lines that come after line AB
+            if (i <= currentRoute.size() - 1) {
+                for (int j = i + 2; j < currentRoute.size(); j++) {
+                    Location locC = currentRoute.get(j - 1);
+                    Location locD = currentRoute.get(j);
+                    if (intersect(locA, locB, locC, locD)) {
+                        //Upon intersect swap two points and reset iteration
+                        swap(i, j - 1);
                         i = 1;
                     }
                     a++;
