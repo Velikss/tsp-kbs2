@@ -8,11 +8,15 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 /*
  *
@@ -21,11 +25,12 @@ import javax.swing.event.ChangeListener;
 public class RightPanel extends JPanel implements ActionListener {
 
     private JPanel settings;
-    private JTextArea infoBox;
+    private JEditorPane infoBox;
     private JScrollPane scroll;
     private JButton startSimulation, generateResults;
     private JSpinner simcount, pointcount, height, width;
     private JCheckBox bruteforcecheck, twooptcheck, nearestneighbourcheck, weightedtwooptcheck;
+    private JLabel simulationSettings, gridSettings;
     private Simulator simulator;
     private LeftPanel left;
     private int simulations = 1;
@@ -44,7 +49,13 @@ public class RightPanel extends JPanel implements ActionListener {
         settings.setBackground(Color.white);
 
 //      Simulatie settings
-        settings.add(new JLabel("Simulatie settings"));
+        simulationSettings = new JLabel("Simulation settings");
+        simulationSettings.setFont(simulationSettings.getFont().deriveFont(13.0f));
+        Font font = simulationSettings.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        simulationSettings.setFont(font.deriveFont(attributes));
+        settings.add(simulationSettings);
         settings.add(new JLabel("Aantal simulaties"));
 
         SpinnerModel countModel = new SpinnerNumberModel(simulations, 1, 50, 1);
@@ -78,7 +89,11 @@ public class RightPanel extends JPanel implements ActionListener {
         weightedtwooptcheck.addActionListener(this);
 
 //      Grid settings
-        settings.add(new JLabel("Simulatie settings"));
+        gridSettings = new JLabel("Grid settings");
+        gridSettings.setFont(gridSettings.getFont().deriveFont(13.0f));
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        gridSettings.setFont(font.deriveFont(attributes));
+        settings.add(gridSettings);
 
         settings.add(new JLabel("Aantal punten"));
         SpinnerModel pcm = new SpinnerNumberModel(simulator.getPoints(), 2, 9025, 1);
@@ -89,7 +104,7 @@ public class RightPanel extends JPanel implements ActionListener {
                 int value = (Integer) pointcount.getValue();
                 //Check if points fit in grid, if not set back to previous value
                 if (value > (simulator.getX() * simulator.getY())) {
-                    infoBox.append(value + " points don't fit in the grid!\n");
+                    printToInfoBox(value + " points don't fit in the grid!");
                     value = simulator.getPoints();
                 }
                 simulator.setPoints(value);
@@ -108,7 +123,7 @@ public class RightPanel extends JPanel implements ActionListener {
                 int value = (Integer) height.getValue();
                 //Check if there is enough room for the points
                 if (value * simulator.getX() < simulator.getPoints()) {
-                    infoBox.append("Please select less points first!\n");
+                    printToInfoBox("Please select less points first!");
                     value = simulator.getY();
                 }
                 simulator.setY(value);
@@ -129,7 +144,7 @@ public class RightPanel extends JPanel implements ActionListener {
                 int value = (Integer) width.getValue();
                 //Check if there is enough room for the points
                 if (value * simulator.getY() < simulator.getPoints()) {
-                    infoBox.append("Please select less points first!\n");
+                    printToInfoBox("Please select less points first!");
                     value = simulator.getX();
                 }
                 simulator.setX(value);
@@ -149,12 +164,10 @@ public class RightPanel extends JPanel implements ActionListener {
 
         add(settings, BorderLayout.PAGE_START);
 
-        infoBox = new JTextArea();
+        infoBox = new JEditorPane("text/html", "");
         infoBox.setBorder(new TitledBorder(new EtchedBorder(), "Info box"));
-        infoBox.setFont(new Font("Serif", Font.ITALIC, 16));
-        infoBox.setLineWrap(true);
-        infoBox.setWrapStyleWord(true);
-        //infoBox.setEditable(false);
+        infoBox.setFont(new Font("Serif", Font.ITALIC, 18));
+        infoBox.setEditable(false);
         scroll = new JScrollPane(infoBox);
         add(scroll, BorderLayout.CENTER);
     }
@@ -162,6 +175,8 @@ public class RightPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startSimulation) {
+            //Clear infoBox from previos messages
+            infoBox.setText(null);
             //First all selected algorithms get added to the list
             ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
             if (weightedtwooptcheck.isSelected()) {
@@ -178,30 +193,59 @@ public class RightPanel extends JPanel implements ActionListener {
             }
 
             if (algorithms.size() != 0) {
+                //Add algorithms and clear old simulation results
                 simulator.newAlgorithms(algorithms);
+                simulator.newSimulations();
 
-//                for (int i = 1; i <= simulations; i++) {
-//                    System.out.println(i + " / " + simulations);
+                //Loop iterations
+                for (int i = 1; i <= simulations; i++) {
+                    printToInfoBox("\nIteration " + i + " / " + simulations);
+                    printToInfoBox("-------------------------------------------");
                     simulator.simStart(simulations);
-//                    System.out.println(simulator.getResults().size());
-//                }
+                    for (int j = 0; j < algorithms.size(); j++) {
+                        printToInfoBox(simulator.getResults().get(j).toString());
+                    }
+                }
                 left.refresh(simulator);
             } else {
-                infoBox.append("No algorithms selected!\n");
+                printToInfoBox("No algorithms selected!\n");
             }
         }
 
         if (e.getSource() == generateResults) {
-            infoBox.append("Exporting results...");
-            simulator.generateResults();
-            infoBox.append("Generated results!\n");
+            boolean NullPointerException = false;
+            printToInfoBox("Exporting results...");
+            try {
+                simulator.generateResults();
+            } catch (NullPointerException n) {
+                printToInfoBox("No data to export!");
+                NullPointerException = true;
+            } finally {
+                if (!NullPointerException) {
+                    if (simulator.FileNotFoundException) {
+                        printToInfoBox(simulator.getFileError());
+                    } else {
+                        printToInfoBox("Exported results to: " + simulator.getFilePath());
+                    }
+                }
+            }
+
         }
 
         if (e.getSource() == bruteforcecheck) {
             if (simulator.getPoints() > 10) {
-                infoBox.append("You have selected too much points for the Bruteforce algorithm!");
+                printToInfoBox("You have selected too much points for the Bruteforce algorithm!");
                 bruteforcecheck.setSelected(false);
             }
+        }
+    }
+
+    public void printToInfoBox(String text) {
+        try {
+            Document doc = infoBox.getDocument();
+            doc.insertString(doc.getLength(), text + "\n", null);
+        } catch (BadLocationException exc) {
+            exc.printStackTrace();
         }
     }
 }

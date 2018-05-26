@@ -16,7 +16,7 @@ public class NearestNeighbour extends Algorithm {
     private ArrayList<Location> pickList = new ArrayList<Location>();
 
     public NearestNeighbour() {
-        super.setName("Nearest Neighbour Algorithm");
+        super.setName("Nearest neighbour algorithm");
     }
 
     @Override

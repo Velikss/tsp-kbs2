@@ -25,6 +25,8 @@ public class Simulator {
     private int Y;
     private int points;
     private Screen s;
+    private String filePath, fileName, fileError;
+    boolean FileNotFoundException;
 
     public Simulator() {
         this.X = 15;
@@ -59,8 +61,8 @@ public class Simulator {
     }
 
     public void simStart(int iterations) {
-        simulations = new ArrayList<ArrayList <Route>>();
-        for (int i = 0; i < iterations; i++) {
+        
+//        for (int i = 0; i < iterations; i++) {
             
             this.generateLocations(X, Y, points);
             routes.clear();
@@ -70,18 +72,19 @@ public class Simulator {
 
             ArrayList<Route> results = (ArrayList<Route>) routes.clone();
             simulations.add(results);
-        }
+//        }
     }
 
     public void generateResults() {
-        String fileName = "Results-"
+        FileNotFoundException = false;
+        fileName = "Results-"
                 + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss")
                         .format(new Date());
-        try {
-            PrintWriter writer = new PrintWriter(
-                    "C:\\Users\\Felix\\Documents\\NetBeansProjects"
+        filePath = "C:\\Users\\Felix\\Documents\\NetBeansProjects"
                     + "\\tsp-kbs2\\Results\\"
-                    + fileName + ".json");
+                    + fileName + ".json";
+        try {
+            PrintWriter writer = new PrintWriter(filePath);
             writer.println("{");
             int sizeSimulations = simulations.size();
             for (int j = 0; j < sizeSimulations; j++) {
@@ -107,7 +110,9 @@ public class Simulator {
             writer.println("}");
             writer.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Error -> File could not be created " + ex.getMessage());
+            FileNotFoundException = true;
+            fileError = "Error -> File could not be created " + ex.getMessage();
+            System.out.println(fileError);
         }
     }
 
@@ -143,12 +148,25 @@ public class Simulator {
         return points;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+    
+    public String getFileError() {
+        return fileError;
+    }
+    
     public ArrayList<Algorithm> getAlgorithms() {
         return algorithms;
     }
 
     public void newAlgorithms(ArrayList<Algorithm> newAlgorithms) {
         this.algorithms = newAlgorithms;
+    }
+    
+    public void newSimulations() {
+//        simulations.clear();
+        simulations = new ArrayList<ArrayList <Route>>();
     }
 
 }

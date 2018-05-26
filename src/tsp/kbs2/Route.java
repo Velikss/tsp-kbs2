@@ -69,7 +69,8 @@ public class Route {
 
     @Override
     public String toString() {
-        return "Route{" + "route=" + route + ", name=" + name + '}';
+//        return "Route{" + "route=" + route + ", name=" + name + '}';
+        return name + " route: " + route;
     }
 
 }

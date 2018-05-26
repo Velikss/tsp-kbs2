@@ -48,5 +48,9 @@ public class Screen extends JFrame {
         repaint();
         left.repaint();
     }
+    
+    public void printToInfoBox(String input) {
+        right.printToInfoBox(input);
+    }
 
 }
