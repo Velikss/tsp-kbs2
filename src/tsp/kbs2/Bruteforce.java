@@ -26,8 +26,8 @@ public class Bruteforce extends Algorithm {
     public Route solve(ArrayList<Location> locations) {
         //Start timer
         time = System.nanoTime();
-
-        int options = calculateOptions(locations.size());
+        
+        bestRoute = new ArrayList<Location>();
 
         //Algorithm
         bestRoute = loop(locations);
@@ -47,8 +47,6 @@ public class Bruteforce extends Algorithm {
             checkRoute(route, i);
         }
 
-//        System.out.println(calculateOptions(allLocs.size()));
-//        System.out.println(total);
         return bestRoute;
     }
 
