@@ -14,13 +14,13 @@ import java.util.ArrayList;
 public abstract class Algorithm {
     
     protected double time;
-    protected double distance;
     private String name;
     protected ArrayList<Location> locations = new ArrayList<>();
     protected Route result;
-    protected boolean infinit = false;
-
+    
     public abstract Route solve(ArrayList<Location> locations);
+    
+    protected abstract double calculateDistance(Location locA, Location locB);
 
     public void setName(String name) {
         this.name = name;
@@ -28,10 +28,5 @@ public abstract class Algorithm {
 
     public String getName() {
         return name;
-    }
-    
-    public void setInifinit(boolean b) {
-        this.infinit = b;
-    }
-       
+    }  
 }

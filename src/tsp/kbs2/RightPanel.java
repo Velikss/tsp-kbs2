@@ -181,7 +181,7 @@ public class RightPanel extends JPanel implements ActionListener {
             //First all selected algorithms get added to the list
             ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
             if (weightedtwooptcheck.isSelected()) {
-                algorithms.add(new WeightedTwoopt());
+                algorithms.add(new WeightedTwoOpt());
             }
             if (nearestneighbourcheck.isSelected()) {
                 algorithms.add(new NearestNeighbour());
@@ -190,7 +190,7 @@ public class RightPanel extends JPanel implements ActionListener {
                 algorithms.add(new Bruteforce());
             }
             if (twooptcheck.isSelected()) {
-                algorithms.add(new Twoopt());
+                algorithms.add(new TwoOpt());
             }
 
             if (algorithms.size() != 0) {
@@ -202,7 +202,7 @@ public class RightPanel extends JPanel implements ActionListener {
                 for (int i = 1; i <= simulations; i++) {
                     printToInfoBox("\nIteration " + i + " / " + simulations);
                     printToInfoBox("-------------------------------------------");
-                    simulator.simStart(simulations);
+                    simulator.simStart();
                     for (int j = 0; j < algorithms.size(); j++) {
                         printToInfoBox(simulator.getResults().get(j).toString());
                         printToInfoBox("Time: " + simulator.getResults().get(j).getTime() + " ms");
@@ -220,7 +220,7 @@ public class RightPanel extends JPanel implements ActionListener {
             boolean NullPointerException = false;
             printToInfoBox("Exporting results...");
             try {
-                simulator.generateResults();
+                simulator.exportResults();
             } catch (NullPointerException n) {
                 printToInfoBox("No data to export!");
                 NullPointerException = true;

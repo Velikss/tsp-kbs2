@@ -12,11 +12,11 @@ import java.util.Collections;
  *
  * @author Felix
  */
-public class Twoopt extends Algorithm {
+public class TwoOpt extends Algorithm {
 
     private ArrayList<Location> currentRoute = new ArrayList<Location>();
 
-    public Twoopt() {
+    public TwoOpt() {
         super.setName("Two-opt Algorithm");
     }
 
@@ -97,24 +97,10 @@ public class Twoopt extends Algorithm {
     }
 
     private void swap(int i, int j) {
-        Location zero = new Location(0, 0);
-//        if (currentRoute.get(i).equals(zero)) {
-//            i -= 1;
-//        }
-//        if (currentRoute.get(j).equals(zero)) {
-//            j -= 1;
-//        }
-//        int ix = currentRoute.get(i).getPositionX();
-//        int iy = currentRoute.get(i).getPositionY();
-//        currentRoute.get(i).setPositionX(currentRoute.get(j).getPositionX());
-//        currentRoute.get(i).setPositionY(currentRoute.get(j).getPositionY());
-//        currentRoute.get(j).setPositionX(ix);
-//        currentRoute.get(j).setPositionY(iy);
-
         Collections.swap(currentRoute, i, j);
     }
 
-    private double calculateDistance(Location locA, Location locB) {
+    protected double calculateDistance(Location locA, Location locB) {
         double distA;
         double distB;
         if (locA.getPositionX() > locB.getPositionX()) {
@@ -128,16 +114,6 @@ public class Twoopt extends Algorithm {
             distB = locB.getPositionY() - locA.getPositionY();
         }
         return Math.sqrt(Math.pow(distA, 2) + Math.pow(distB, 2));
-    }
-
-    private double getTotalDistance(ArrayList<Location> route) {
-        double totalDistance = 0;
-
-        for (int i = 0; i < route.size() - 1; i++) {
-            totalDistance += calculateDistance(route.get(i), route.get(i + 1));
-        }
-        this.distance = totalDistance;
-        return distance;
     }
 
 }

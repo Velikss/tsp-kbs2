@@ -5,7 +5,6 @@
 package tsp.kbs2;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -22,7 +21,6 @@ public class Route {
         this.name = name;
         this.route = route;
         this.time = time / 1E6;
-//        this.time = TimeUnit.MILLISECONDS.convert((long) time, TimeUnit.NANOSECONDS);
         getTotalDistance(route);
     }
 

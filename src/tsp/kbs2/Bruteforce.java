@@ -4,9 +4,7 @@
  */
 package tsp.kbs2;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  *
@@ -15,6 +13,7 @@ import java.util.Collections;
 public class Bruteforce extends Algorithm {
     private ArrayList<Location> allLocs;
     private ArrayList<Location> bestRoute;
+    private double distance;
 
     public Bruteforce() {
         super.setName("Bruteforce algorithm");
@@ -82,7 +81,7 @@ public class Bruteforce extends Algorithm {
         return factorial;
     }
 
-    private double calculateDistance(Location locA, Location locB) {
+    protected double calculateDistance(Location locA, Location locB) {
         double distA;
         double distB;
         if (locA.getPositionX() > locB.getPositionX()) {
@@ -98,7 +97,7 @@ public class Bruteforce extends Algorithm {
         return Math.sqrt(Math.pow(distA, 2) + Math.pow(distB, 2));
     }
 
-    private double getTotalDistance(ArrayList<Location> route) {
+    protected double getTotalDistance(ArrayList<Location> route) {
         double totalDistance = 0;
 
         for (int i = 0; i < route.size() - 1; i++) {

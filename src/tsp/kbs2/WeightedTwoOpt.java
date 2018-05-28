@@ -4,12 +4,12 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class WeightedTwoopt extends Algorithm {
+public class WeightedTwoOpt extends Algorithm {
 
     private ArrayList<Location> currentRoute;
     private ArrayList<Double> distances;
 
-    public WeightedTwoopt() {
+    public WeightedTwoOpt() {
         super.setName("Weighted two opt algorithm");
         currentRoute = new ArrayList<>();
     }
@@ -96,7 +96,7 @@ public class WeightedTwoopt extends Algorithm {
         }
     }
 
-    private double calculateDistance(Location locA, Location locB) {
+    protected double calculateDistance(Location locA, Location locB) {
         double distA;
         double distB;
         if (locA.getPositionX() > locB.getPositionX()) {
@@ -130,20 +130,6 @@ public class WeightedTwoopt extends Algorithm {
     }
 
     private void swap(int i, int j) {
-        Location zero = new Location(0, 0);
-        if (currentRoute.get(i).equals(zero)) {
-            i -= 1;
-        }
-        if (currentRoute.get(j).equals(zero)) {
-            j -= 1;
-        }
-//        int ix = currentRoute.get(i).getPositionX();
-//        int iy = currentRoute.get(i).getPositionY();
-//        currentRoute.get(i).setPositionX(currentRoute.get(j).getPositionX());
-//        currentRoute.get(i).setPositionY(currentRoute.get(j).getPositionY());
-//        currentRoute.get(j).setPositionX(ix);
-//        currentRoute.get(j).setPositionY(iy);
-
         Collections.swap(currentRoute, i, j);
     }
 }

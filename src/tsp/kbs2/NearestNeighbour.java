@@ -49,7 +49,7 @@ public class NearestNeighbour extends Algorithm {
         return result;
     }
 
-    private double calculateDistance(Location locA, Location locB) {
+    protected double calculateDistance(Location locA, Location locB) {
         double distA;
         double distB;
         if (locA.getPositionX() > locB.getPositionX()) {
@@ -65,17 +65,7 @@ public class NearestNeighbour extends Algorithm {
         return Math.sqrt(Math.pow(distA, 2) + Math.pow(distB, 2));
     }
 
-    private double getTotalDistance(ArrayList<Location> route) {
-        double totalDistance = 0;
-
-        for (int i = 0; i < route.size(); i++) {
-            totalDistance += calculateDistance(route.get(i), route.get(i+1));
-        }
-        this.distance = totalDistance;
-        return distance;
-    }
-
-    public Location findNearest(ArrayList<Location> neighbours, Location a) {
+    private Location findNearest(ArrayList<Location> neighbours, Location a) {
         Location nearest = null;
         double distance = 999999999;
         for (Location s : neighbours) {

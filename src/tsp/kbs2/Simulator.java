@@ -20,11 +20,10 @@ public class Simulator {
     private ArrayList<Location> locations = new ArrayList<Location>();
     private ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
     private ArrayList<Route> routes = new ArrayList<Route>();
-    ArrayList<ArrayList<Route>> simulations; // = new ArrayList<ArrayList<Route>>();
+    ArrayList<ArrayList<Route>> simulations;
     private int X;
     private int Y;
     private int points;
-    private Screen s;
     private String filePath, fileName, fileError;
     boolean FileNotFoundException;
 
@@ -60,10 +59,7 @@ public class Simulator {
         System.out.println("Generated: " + locations);
     }
 
-    public void simStart(int iterations) {
-        
-//        for (int i = 0; i < iterations; i++) {
-            
+    public void simStart() {
             this.generateLocations(X, Y, points);
             routes.clear();
             for (Algorithm a : algorithms) {
@@ -72,10 +68,9 @@ public class Simulator {
 
             ArrayList<Route> results = (ArrayList<Route>) routes.clone();
             simulations.add(results);
-//        }
     }
 
-    public void generateResults() {
+    public void exportResults() {
         FileNotFoundException = false;
         fileName = "Results-"
                 + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss")
