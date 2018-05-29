@@ -7,9 +7,6 @@ package tsp.kbs2;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**

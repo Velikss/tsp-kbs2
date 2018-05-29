@@ -5,8 +5,6 @@
  */
 package tsp.kbs2;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Felix

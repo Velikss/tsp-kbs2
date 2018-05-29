@@ -1,8 +1,0 @@
-{
-    "Iteration 1" : [{
-       "name": "Nearest Neighbour Algorithm",
-       "route": ["0:0", "4:8", "5:10", "9:15", "10:14", "14:11", "0:0"],
-       "time": "0.055784",
-       "distance": "41.802171502069754"
-        }]
-}
